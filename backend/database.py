@@ -1,31 +1,39 @@
 import sqlite3
+import logging
 import os
 from datetime import datetime
+from typing import Dict, Optional
+
+logger = logging.getLogger(__name__)
 
 class Database:
     def __init__(self):
-        self.db_path = 'cboin.db'
-        self.init_db()
+        # Get database path from environment variable or use default
+        self.db_path = os.getenv('DATABASE_PATH', 'cboin.db')
+        self._create_tables()
         
-    def init_db(self):
+    def _create_tables(self):
         """Veritabanını ve tabloları oluştur"""
-        if not os.path.exists(self.db_path):
-            conn = sqlite3.connect(self.db_path)
-            cursor = conn.cursor()
-            
-            # Users tablosu
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS users (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username TEXT UNIQUE NOT NULL,
-                    password TEXT NOT NULL,
-                    email TEXT UNIQUE NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            ''')
-            
-            conn.commit()
-            conn.close()
+        try:
+            if not os.path.exists(self.db_path):
+                conn = sqlite3.connect(self.db_path)
+                cursor = conn.cursor()
+                
+                # Users tablosu
+                cursor.execute('''
+                    CREATE TABLE IF NOT EXISTS users (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        username TEXT UNIQUE NOT NULL,
+                        password TEXT NOT NULL,
+                        email TEXT UNIQUE NOT NULL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )
+                ''')
+                
+                conn.commit()
+                conn.close()
+        except Exception as e:
+            logger.error(f"Error creating tables: {str(e)}")
     
     def create_user(self, username, password, email):
         """Yeni kullanıcı oluştur"""
@@ -42,7 +50,7 @@ class Database:
             conn.close()
             return True
         except Exception as e:
-            print(f"Error creating user: {str(e)}")
+            logger.error(f"Error creating user: {str(e)}")
             return False
     
     def get_user_by_username(self, username):
@@ -66,7 +74,7 @@ class Database:
                 }
             return None
         except Exception as e:
-            print(f"Error getting user: {str(e)}")
+            logger.error(f"Error getting user: {str(e)}")
             return None
     
     def get_user_by_email(self, email):
@@ -90,7 +98,7 @@ class Database:
                 }
             return None
         except Exception as e:
-            print(f"Error getting user: {str(e)}")
+            logger.error(f"Error getting user: {str(e)}")
             return None
 
 # Dependency

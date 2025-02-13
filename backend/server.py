@@ -23,6 +23,9 @@ import tweepy
 from textblob import TextBlob
 import signal
 import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, scoped_session
+from sqlalchemy.orm.session import sessionmaker
 
 # Logging ayarları
 logging.basicConfig(level=logging.INFO)
@@ -69,6 +72,12 @@ class UserRegister(BaseModel):
 class UserLogin(BaseModel):
     username: str
     password: str
+
+# Database
+DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///cboin.db')
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
 
 @app.on_event("startup")
 async def startup_event():
