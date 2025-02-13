@@ -78,31 +78,17 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+# Server başlatıldığında çalışacak fonksiyon
 @app.on_event("startup")
 async def startup_event():
     """Server başlatıldığında çalışacak fonksiyon"""
     logger.info("Server başlatılıyor...")
     
-    # SARIMA model eğitimini başlat
-    background_tasks = BackgroundTasks()
-    background_tasks.add_task(ai_analysis.train_model, max_iter=10)  # İterasyon sayısını sınırla
-    
-    # İlk tahminleri hemen yap
-    await ai_analysis.update_daily_price()
-    await ai_analysis.update_predictions()
-    logger.info("SARIMA model schedule başlatıldı")
-
-    # İndikatör analizini başlat
     try:
-        # İlk analizi hemen yap
-        signals = multi_coin_analyzer.run_analysis()
-        logger.info(f"İlk indikatör analizi tamamlandı: {len(signals)} sinyal bulundu")
-        
-        # Periyodik analizi başlat
-        asyncio.create_task(run_indicator_analysis())
-        logger.info("İndikatör analizi schedule başlatıldı")
+        # Günlük fiyat güncellemesi
+        await ai_analysis.update_daily_price()
     except Exception as e:
-        logger.error(f"İndikatör analizi başlatılırken hata: {str(e)}")
+        logger.error(f"Startup sırasında hata: {str(e)}")
 
 async def run_indicator_analysis():
     """İndikatör analizini periyodik olarak çalıştır"""

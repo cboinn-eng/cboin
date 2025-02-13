@@ -10,7 +10,7 @@ import time
 from binance.client import Client
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 import traceback
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, BackgroundTasks
 from pydantic import BaseModel
 import asyncio
 from pmdarima import auto_arima  # Hiperparametre optimizasyonu için
@@ -237,7 +237,7 @@ class AiAnalysis:
             return None
 
     async def get_bitcoin_price(self):
-        """Binance'den Bitcoin kapanış fiyatını alır"""
+        """Binance'den Bitcoin kapanış fiyatını al"""
         try:
             client = Client(BINANCE_API_KEY, BINANCE_API_SECRET)
             # Son günün kapanış fiyatını al
@@ -379,6 +379,23 @@ class AiAnalysis:
             logging.error(f"Tahminler kaydedilirken hata: {str(e)}")
             return False
 
+    async def update_daily_price(self):
+        """Bitcoin fiyatını güncelle"""
+        try:
+            date, price = await self.get_bitcoin_price()
+            if date and price:
+                if await self.save_price_to_csv(date, price):
+                    print(f"* Yeni fiyat kaydedildi: {date}, ${price:,.2f}")
+                    
+                    # Yeni fiyat kaydedildikten sonra modeli eğit
+                    background_tasks = BackgroundTasks()
+                    background_tasks.add_task(self.train_model, max_iter=10)
+                    return True
+            return False
+        except Exception as e:
+            logging.error(f"Günlük fiyat güncellemesi sırasında hata: {str(e)}")
+            return False
+
 app = FastAPI()
 
 class AnalysisRequest(BaseModel):
@@ -450,7 +467,7 @@ if __name__ == "__main__":
     
     # Initialize scheduler
     ai = AiAnalysis()
-    asyncio.run(ai.train_model())
+    asyncio.run(ai.update_daily_price())
     
     # Run FastAPI app
     import uvicorn
