@@ -35,7 +35,7 @@ app = FastAPI()
 # CORS ayarları
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Tüm originlere izin ver
+    allow_origins=["https://cboinner2.onrender.com"],  # Frontend URL'si
     allow_credentials=True,
     allow_methods=["*"],  # Tüm HTTP metodlarına izin ver
     allow_headers=["*"],  # Tüm headerlara izin ver
