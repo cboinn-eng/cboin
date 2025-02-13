@@ -1,10 +1,11 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
+import json
 import logging
 
 # Logging ayarları
@@ -17,8 +18,10 @@ class NasdaqMarketAnalyzer:
         self.options.add_argument('--headless')
         self.options.add_argument('--no-sandbox')
         self.options.add_argument('--disable-dev-shm-usage')
-        self.service = Service(ChromeDriverManager().install())
-        self.driver = webdriver.Chrome(service=self.service, options=self.options)
+        self.options.add_argument('--disable-gpu')
+        self.options.add_argument('--remote-debugging-port=9222')
+        self.options.binary_location = '/usr/bin/google-chrome'
+        self.driver = webdriver.Chrome(options=self.options)
         self.is_running = False
         logger.info("NasdaqMarketAnalyzer initialized")
 
