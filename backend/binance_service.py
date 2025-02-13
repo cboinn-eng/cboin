@@ -3,16 +3,28 @@ from binance.exceptions import BinanceAPIException
 import logging
 from typing import Dict, List
 import asyncio
+import os
+from dotenv import load_dotenv
+
+# .env dosyasını yükle
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
 class BinanceService:
     def __init__(self):
-        # Test API anahtarları ile başlatıyoruz
+        # API anahtarlarını çevre değişkenlerinden al
+        api_key = os.getenv('BINANCE_API_KEY')
+        api_secret = os.getenv('BINANCE_API_SECRET')
+        
+        if not api_key or not api_secret:
+            logger.warning("Binance API anahtarları bulunamadı!")
+            api_key = ""
+            api_secret = ""
+        
         self.client = Client(
-            api_key="your_api_key",
-            api_secret="your_api_secret",
-            testnet=True  # Test modunda başlat
+            api_key=api_key,
+            api_secret=api_secret
         )
         
         # İzlenecek coin çiftleri
