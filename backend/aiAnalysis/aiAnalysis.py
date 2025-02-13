@@ -17,6 +17,7 @@ from pmdarima import auto_arima  # Hiperparametre optimizasyonu için
 import matplotlib.pyplot as plt  # Grafik oluşturmak için
 import io
 import base64  # Grafiği base64 formatına dönüştürmek için
+from dotenv import load_dotenv  # .env dosyasından değişkenleri yüklemek için
 
 warnings.filterwarnings('ignore')
 
