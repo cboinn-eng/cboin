@@ -11,6 +11,8 @@ const TwitterFeed = ({ username }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:10000';
+
     useEffect(() => {
         fetchTweets();
         const interval = setInterval(fetchTweets, 300000); // Her 5 dakikada bir güncelle
@@ -19,7 +21,7 @@ const TwitterFeed = ({ username }) => {
 
     const fetchTweets = async () => {
         try {
-            const response = await axios.get(`http://localhost:8001/social/twitter/recent-tweets/${username}`);
+            const response = await axios.get(`${API_URL}/social/twitter/recent-tweets/${username}`);
             setTweets(response.data.tweets);
             setLoading(false);
         } catch (err) {
