@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="50" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .text { font-family: Arial, sans-serif; font-weight: bold; }
+    .coin { fill: #f7931a; }
+    .text-primary { fill: #2f3542; }
+  </style>
+  <circle class="coin" cx="25" cy="25" r="20"/>
+  <text x="60" y="35" class="text text-primary" font-size="30">CBOIN</text>
+</svg>

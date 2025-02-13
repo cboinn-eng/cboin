@@ -1,0 +1,126 @@
+.trade-history {
+  width: 100%;
+  background: linear-gradient(145deg, #1a1a1a, #202020);
+  border-radius: 15px;
+  box-shadow: 
+    5px 5px 10px rgba(0, 0, 0, 0.2),
+    -5px -5px 10px rgba(255, 255, 255, 0.05);
+  padding: 20px;
+}
+
+.trade-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.trade-history-header h3 {
+  color: #ffffff;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.trade-history-header .symbol {
+  color: #177ddc;
+  font-weight: bold;
+}
+
+.trade-history-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.column-headers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #8c8c8c;
+  font-size: 0.9rem;
+}
+
+.trades {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.trade-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 6px 0;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
+}
+
+.trade-row:hover {
+  transform: translateZ(5px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.trade-row.buy .price {
+  color: #26a69a;
+}
+
+.trade-row.sell .price {
+  color: #ef5350;
+}
+
+.quantity, .time {
+  color: #ffffff;
+}
+
+/* Custom Scrollbar */
+.trades::-webkit-scrollbar {
+  width: 6px;
+}
+
+.trades::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.trades::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.trades::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Animation for new trades */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.trade-row {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .trade-history {
+    padding: 15px;
+  }
+
+  .column-headers, .trade-row {
+    font-size: 0.8rem;
+  }
+
+  .trades {
+    max-height: 300px;
+  }
+}

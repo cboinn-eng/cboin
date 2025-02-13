@@ -1,0 +1,39 @@
+.twitter-feed-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.twitter-feed-header {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+.tweet-item {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.tweet-item:last-child {
+    border-bottom: none;
+}
+
+.tweet-item .ant-list-item-meta-description {
+    white-space: pre-wrap;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.tweet-item .ant-list-item-action {
+    margin-top: 12px;
+}
+
+.tweet-item .ant-list-item-action > li {
+    color: #8c8c8c;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.tweet-item .ant-list-item-action > li:hover {
+    color: #1DA1F2;
+}

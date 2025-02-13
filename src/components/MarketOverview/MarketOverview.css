@@ -1,0 +1,354 @@
+.market-overview {
+  background: rgba(30, 30, 30, 0.5);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.market-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  padding: 0 10px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
+
+.quick-trade-section {
+  margin-top: 20px;
+}
+
+.connect-wallet-btn {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1890ff, #096dd9);
+  border: none;
+  font-weight: 500;
+}
+
+.wallet-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  background: rgba(24, 144, 255, 0.1);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.wallet-address {
+  color: #1890ff;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.ant-input-number,
+.ant-select,
+.ant-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+}
+
+.ant-input-number:hover,
+.ant-select:hover,
+.ant-input:hover {
+  border-color: #1890ff !important;
+}
+
+.ant-select-selector {
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+.ant-select-selection-item {
+  color: #fff !important;
+}
+
+.ant-btn {
+  border-radius: 8px !important;
+  height: 40px;
+  font-weight: 500;
+}
+
+.ant-btn-primary {
+  background: linear-gradient(135deg, #1890ff, #096dd9) !important;
+  border: none !important;
+}
+
+.ant-btn-primary:hover {
+  background: linear-gradient(135deg, #40a9ff, #1890ff) !important;
+}
+
+.ant-divider {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.market-overview {
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+}
+
+.market-tabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.market-tab {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.market-tab.active {
+  color: #fff;
+  border-bottom: 2px solid #1890ff;
+}
+
+.market-content {
+  display: flex;
+  gap: 24px;
+}
+
+.dual-swap-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.swap-card {
+  background: #262626;
+  border: 1px solid #333;
+  border-radius: 12px;
+}
+
+.swap-card .ant-card-head {
+  border-bottom: 1px solid #333;
+  padding: 16px 24px;
+}
+
+.swap-card .ant-card-head-title {
+  color: #fff;
+  font-size: 18px;
+}
+
+.swap-pair-container {
+  padding: 16px 0;
+}
+
+.swap-pair-container h3 {
+  color: #fff;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.token-select-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.token-select-group .ant-input {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #fff;
+}
+
+.token-select-group .ant-select {
+  background: #1a1a1a;
+}
+
+.token-select-group .ant-select-selector {
+  background: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  color: #fff !important;
+}
+
+.swap-icon {
+  color: #1890ff;
+  font-size: 20px;
+  margin: 0 12px;
+}
+
+.swap-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.swap-actions .ant-btn {
+  min-width: 200px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.ant-divider {
+  border-color: #333;
+  margin: 24px 0;
+}
+
+/* Dark theme overrides for Select dropdown */
+.ant-select-dropdown {
+  background-color: #262626 !important;
+}
+
+.ant-select-item {
+  color: #fff !important;
+}
+
+.ant-select-item-option-selected {
+  background-color: #1890ff !important;
+}
+
+.ant-select-item-option-active {
+  background-color: #096dd9 !important;
+}
+
+/* Input number arrows color fix */
+.ant-input[type="number"]::-webkit-inner-spin-button,
+.ant-input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+  background-color: #1a1a1a;
+}
+
+/* Modal styles */
+.ant-modal-content {
+  background: #262626 !important;
+}
+
+.ant-modal-header {
+  background: #262626 !important;
+  border-bottom: 1px solid #333 !important;
+}
+
+.ant-modal-title {
+  color: #fff !important;
+}
+
+.ant-modal-close {
+  color: #fff !important;
+}
+
+.ant-modal-body {
+  color: #fff !important;
+}
+
+/* Crypto Markets Table */
+.crypto-markets {
+  margin-top: 20px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ant-table {
+  background: transparent !important;
+}
+
+.ant-table-thead > tr > th {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.highlight-row {
+  background: rgba(24, 144, 255, 0.1) !important;
+}
+
+.highlight-row:hover > td {
+  background: rgba(24, 144, 255, 0.15) !important;
+}
+
+.coin-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.coin-name {
+  font-weight: 500;
+}
+
+.coin-symbol {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 12px;
+}
+
+.positive {
+  color: #52c41a !important;
+}
+
+.negative {
+  color: #ff4d4f !important;
+}
+
+/* Tab Buttons */
+.market-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tab-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-button.active {
+  background: #1890ff;
+  border-color: #1890ff;
+  color: white;
+}

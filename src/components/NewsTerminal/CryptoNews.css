@@ -1,0 +1,61 @@
+.crypto-news-card {
+    height: 100%;
+    overflow: auto;
+}
+
+.crypto-news-card .ant-card-body {
+    padding: 12px;
+}
+
+.crypto-news-card .ant-list-item {
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+}
+
+.crypto-news-card .ant-list-item:hover {
+    background-color: #f0f0f0;
+}
+
+.news-description {
+    margin: 8px 0;
+    color: #666;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.error-message {
+    text-align: center;
+    color: #ff4d4f;
+    padding: 16px;
+}
+
+/* Resim stilleri */
+.crypto-news-card .ant-image {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.crypto-news-card .ant-list-item-meta {
+    align-items: flex-start;
+}
+
+.crypto-news-card .ant-list-item-meta-avatar {
+    margin-right: 16px;
+}
+
+/* Mobil görünüm için responsive tasarım */
+@media (max-width: 576px) {
+    .crypto-news-card .ant-list-item-meta-avatar {
+        display: none;
+    }
+    
+    .crypto-news-card .ant-list-item {
+        padding: 8px;
+    }
+}

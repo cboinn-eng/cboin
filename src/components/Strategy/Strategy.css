@@ -1,0 +1,234 @@
+:root {
+    --dark-bg: #0a1929;
+    --card-bg: #132f4c;
+    --hover-bg: #173a5e;
+    --border-color: #234d6f;
+    --text-primary: #ffffff;
+    --text-secondary: #b2bac2;
+    --text-hint: #6b7c93;
+    --neon-green: #4caf50;
+    --neon-red: #f44336;
+    --neon-blue: #2196f3;
+    --neon-yellow: #ffeb3b;
+}
+
+.strategy-container {
+    padding: 24px;
+    background-color: var(--dark-bg);
+    min-height: 100vh;
+    color: var(--text-primary);
+}
+
+.strategy-header {
+    margin-bottom: 24px;
+}
+
+/* Card Stilleri */
+.analyzed-coins-card {
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+    margin-bottom: 24px;
+}
+
+.analyzed-coins-card .ant-card-body {
+    padding: 24px !important;
+}
+
+/* Tablo Stilleri */
+.signals-table {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.signals-table .ant-table {
+    background-color: transparent;
+    color: var(--text-primary);
+}
+
+.signals-table .ant-table-thead > tr > th {
+    background-color: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    border-bottom: 2px solid var(--border-color) !important;
+    padding: 16px !important;
+    font-weight: 600;
+}
+
+.signals-table .ant-table-tbody > tr > td {
+    border-bottom: 1px solid var(--border-color) !important;
+    background-color: transparent !important;
+    color: var(--text-secondary);
+    padding: 16px !important;
+}
+
+.signals-table .ant-table-tbody > tr:hover > td {
+    background-color: var(--hover-bg) !important;
+}
+
+/* İstatistik Kartları */
+.stat-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Coin Tag'leri */
+.coin-tag {
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.active-coin {
+    background-color: rgba(76, 175, 80, 0.1) !important;
+    color: var(--neon-green) !important;
+    border: 1px solid var(--neon-green) !important;
+    animation: pulseGlow 2s infinite;
+}
+
+.inactive-coin {
+    background-color: rgba(244, 67, 54, 0.1) !important;
+    color: var(--neon-red) !important;
+    border: 1px solid var(--neon-red) !important;
+    animation: pulseWarn 2s infinite;
+}
+
+/* Geri Sayım */
+.countdown-container {
+    background-color: var(--card-bg);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.countdown-container .ant-progress-circle {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.countdown-container .ant-progress-circle:hover {
+    transform: scale(1.1) translateZ(10px);
+}
+
+.countdown-container .ant-progress-text {
+    color: var(--text-primary) !important;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px !important;
+    font-weight: 600;
+}
+
+.countdown-label {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+/* İndikatör Değerleri */
+.indicator-value {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.trend-icon {
+    font-size: 12px;
+}
+
+/* Tooltip Stilleri */
+.ant-tooltip-inner {
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-primary);
+}
+
+/* İstatistik Stilleri */
+.ant-statistic-title {
+    color: var(--text-secondary) !important;
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+}
+
+.ant-statistic-content {
+    color: var(--text-primary) !important;
+    font-size: 24px !important;
+    font-weight: 600 !important;
+}
+
+/* Animasyonlar */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.2); }
+    50% { box-shadow: 0 0 15px rgba(76, 175, 80, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.2); }
+}
+
+@keyframes pulseWarn {
+    0% { box-shadow: 0 0 5px rgba(244, 67, 54, 0.2); }
+    50% { box-shadow: 0 0 15px rgba(244, 67, 54, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(244, 67, 54, 0.2); }
+}
+
+/* Scrollbar Stilleri */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--hover-bg);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .strategy-container {
+        padding: 16px;
+    }
+    
+    .analyzed-coins-card .ant-card-body {
+        padding: 16px !important;
+    }
+    
+    .signals-table .ant-table-thead > tr > th,
+    .signals-table .ant-table-tbody > tr > td {
+        padding: 12px !important;
+        font-size: 14px;
+    }
+    
+    .ant-statistic-content {
+        font-size: 20px !important;
+    }
+}

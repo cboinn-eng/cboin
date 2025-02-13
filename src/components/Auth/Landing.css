@@ -1,0 +1,152 @@
+.landing-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.landing-content {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+
+.landing-header {
+    margin-bottom: 64px;
+}
+
+.landing-logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 24px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.landing-subtitle {
+    font-size: 20px;
+    color: var(--text-secondary);
+    margin-top: 16px;
+}
+
+/* Features */
+.landing-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin-bottom: 64px;
+    padding: 0 24px;
+}
+
+.feature-item {
+    background: var(--bg-card);
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition-normal);
+}
+
+.feature-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.feature-icon {
+    font-size: 48px;
+    margin-bottom: 24px;
+}
+
+.feature-item h3 {
+    color: var(--text-primary);
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.feature-item p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Call to Action */
+.landing-cta {
+    margin-bottom: 64px;
+}
+
+.landing-cta .ant-btn {
+    height: 48px;
+    padding: 0 32px;
+    font-size: 16px;
+    border-radius: 24px;
+}
+
+.landing-cta .ant-btn-primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.landing-cta .ant-btn-primary:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* Stats */
+.landing-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    margin-top: 64px;
+}
+
+.stat-item h4 {
+    color: var(--primary-color);
+    font-size: 32px;
+    margin: 0 0 8px;
+}
+
+.stat-item p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Animations */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .landing-container {
+        padding: 24px 16px;
+    }
+    
+    .landing-header {
+        margin-bottom: 40px;
+    }
+    
+    .landing-logo {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .landing-features {
+        gap: 24px;
+        margin-bottom: 40px;
+    }
+    
+    .feature-item {
+        padding: 24px;
+    }
+    
+    .landing-cta {
+        margin-bottom: 40px;
+    }
+    
+    .landing-stats {
+        gap: 24px;
+        margin-top: 40px;
+    }
+}

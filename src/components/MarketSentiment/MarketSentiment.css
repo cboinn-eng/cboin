@@ -1,0 +1,58 @@
+.market-sentiment-card {
+  width: 100%;
+  background-color: #1a1a1a !important;
+  border-radius: 8px;
+  padding: 16px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #333;
+  perspective: 1000px;
+  margin-bottom: 20px;
+}
+
+.market-sentiment-card:hover {
+  transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.market-sentiment-card .ant-card-head-title {
+  color: #fff;  
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.market-sentiment-content {
+  font-size: 16px;
+  color: white;
+  line-height: 1.5;
+  transform: rotateX(5deg) rotateY(5deg);
+}
+
+.market-sentiment-content p {
+  margin: 10px 0;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.market-sentiment-content p:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.ant-spin-dot {
+  color: white !important;
+}
+
+/* Sentiment colors */
+.sentiment-positive {
+  color: #4CAF50;
+  text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.sentiment-negative {
+  color: #FF5252;
+  text-shadow: 0 0 10px rgba(255, 82, 82, 0.3);
+}

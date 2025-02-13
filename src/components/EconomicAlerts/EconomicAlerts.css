@@ -1,0 +1,54 @@
+.economic-alerts-card {
+  background: #0c0d0e !important;
+  border: 1px solid #1f1f1f !important;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.economic-alerts-card .ant-card-head {
+  background: #001529;
+  border-bottom: 1px solid #1f1f1f;
+  padding: 0 16px;
+}
+
+.economic-alerts-card .ant-card-head-title {
+  color: #fff;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.event-item {
+  padding: 12px !important;
+  border-bottom: 1px solid #1f1f1f !important;
+}
+
+.event-content {
+  width: 100%;
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.event-header h5 {
+  margin: 0;
+  color: #fff;
+}
+
+.event-time {
+  color: #8c8c8c;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.event-description {
+  color: #bfbfbf;
+  font-size: 14px;
+}

@@ -1,0 +1,394 @@
+.alerts-card {
+    height: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 20px;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.title-icon {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+.info-icon {
+    font-size: 16px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.unread-badge {
+    margin-left: 8px;
+}
+
+.alerts-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--background-dark);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.alerts-list {
+    margin-bottom: 16px;
+}
+
+.alert-item {
+    background: var(--background-light);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.alert-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow);
+}
+
+.alert-item.read {
+    opacity: 0.7;
+}
+
+.alert-badge {
+    width: 100%;
+}
+
+.alert-content {
+    width: 100%;
+}
+
+.alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.alert-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1em;
+}
+
+.alert-message {
+    display: block;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.alert-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.alert-time {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.mark-read-button {
+    padding: 0;
+    height: auto;
+    font-size: 0.9em;
+}
+
+.ant-list-pagination {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.ant-pagination-item {
+    background: var(--background-light);
+    border-color: var(--background-dark);
+}
+
+.ant-pagination-item-active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.ant-pagination-item a {
+    color: var(--text-primary);
+}
+
+.loading-container,
+.error-alert,
+.info-alert {
+    margin: 20px;
+    border-radius: var(--border-radius);
+}
+
+@media (max-width: 768px) {
+    .alerts-stats {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .stat-item {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .alert-item {
+        padding: 12px;
+    }
+
+    .alert-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .alert-footer {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .alert-item {
+        transition: none;
+    }
+}
+
+.signals-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px;
+}
+
+.signal-card {
+    background: #141414;
+    border: 1px solid #1f1f1f;
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.2s ease;
+}
+
+.signal-card:hover {
+    border-color: #2f2f2f;
+}
+
+.signal-card.long {
+    border-left: 3px solid #52c41a;
+}
+
+.signal-card.short {
+    border-left: 3px solid #ff4d4f;
+}
+
+.signal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signal-details {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.signal-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.signal-symbol {
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.signal-time {
+    color: #8c8c8c;
+    font-size: 12px;
+}
+
+.signal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.signal-price {
+    background: #1a1a1a;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.price-label {
+    color: #8c8c8c;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.price-value {
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.price-percent {
+    font-size: 11px;
+    margin-top: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.price-percent.profit {
+    background: rgba(82, 196, 26, 0.1);
+    color: #52c41a;
+}
+
+.price-percent.risk {
+    background: rgba(255, 77, 79, 0.1);
+    color: #ff4d4f;
+}
+
+.loading-container,
+.empty-container {
+    color: #8c8c8c;
+    text-align: center;
+    padding: 24px;
+}
+
+/* Ant Design override styles */
+.ant-list-item {
+    border-bottom: 1px solid #303030 !important;
+    padding: 16px !important;
+}
+
+.ant-list-item:last-child {
+    border-bottom: none !important;
+}
+
+.ant-list-item-meta-title {
+    color: #fff !important;
+}
+
+.ant-list-item-meta-description {
+    color: #8c8c8c !important;
+}
+
+.ant-tag {
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+.ant-tag-success {
+    background-color: #237804 !important;
+    border-color: #389e0d !important;
+}
+
+.ant-tag-error {
+    background-color: #a8071a !important;
+    border-color: #cf1322 !important;
+}
+
+.ant-tag-warning {
+    background-color: #ad6800 !important;
+    border-color: #d48806 !important;
+}
+
+.alerts-card .ant-list-item {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: #fff;
+    transition: all 0.3s;
+}
+
+.alerts-card .ant-list-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+}
+
+.alerts-card .ant-list-item.read {
+    opacity: 0.7;
+    background: #f9f9f9;
+}
+
+.alerts-card .ant-list-item-meta-title {
+    margin-bottom: 8px !important;
+}
+
+.alerts-card .ant-tag {
+    margin-right: 8px;
+}
+
+.alerts-card .ant-space {
+    margin-bottom: 8px;
+}
+
+.alerts-card .ant-list-item-action {
+    margin-left: 48px;
+}
+
+.alerts-card .ant-btn-text {
+    padding: 4px 8px;
+}
+
+.alerts-card .ant-btn-text:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.alerts-card .ant-drawer-body {
+    padding: 24px;
+}
+
+.alerts-card .ant-drawer-body .ant-space {
+    width: 100%;
+}
+
+.alerts-card .ant-drawer-body .ant-space-item {
+    width: 100%;
+}
+
+.alerts-card .ant-drawer-body .ant-typography {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.alerts-card .ant-drawer-body .ant-select,
+.alerts-card .ant-drawer-body .ant-picker {
+    margin-bottom: 16px;
+}
+
+.alerts-card .ant-drawer-body .ant-switch {
+    margin-right: 8px;
+}
+
+.alerts-card .ant-drawer-footer {
+    text-align: right;
+}
+
+.alerts-card .ant-drawer-footer .ant-btn {
+    margin-left: 8px;
+}

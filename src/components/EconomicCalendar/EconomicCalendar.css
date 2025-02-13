@@ -1,0 +1,426 @@
+.economic-calendar {
+    padding: 20px;
+    background: #1a1a1a;
+}
+
+.calendar-card {
+    background: #262626;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon {
+    font-size: 24px;
+    color: #1890ff;
+}
+
+.header-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.calendar-stats {
+    margin: 24px 0;
+}
+
+.stat-card {
+    background: #2f2f2f;
+    border-radius: 8px;
+    border: 1px solid #363636;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.stat-card .ant-statistic-title {
+    color: #8c8c8c;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.stat-card .ant-statistic-content {
+    color: #fff;
+}
+
+.stat-card .ant-statistic-content-value {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.stat-card .anticon {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.total-events .anticon {
+    color: #1890ff;
+}
+
+.high-impact .anticon {
+    color: #ff4d4f;
+}
+
+.upcoming .anticon {
+    color: #1890ff;
+}
+
+.filters-container {
+    margin: 24px 0;
+    padding: 16px;
+    background: #2f2f2f;
+    border-radius: 8px;
+}
+
+.events-table {
+    margin-top: 24px;
+}
+
+.events-table .ant-table {
+    background: #2f2f2f;
+    border-radius: 8px;
+}
+
+.events-table .ant-table-thead > tr > th {
+    background: #363636;
+    color: #fff;
+    border-bottom: 1px solid #404040;
+}
+
+.events-table .ant-table-tbody > tr > td {
+    border-bottom: 1px solid #404040;
+    color: #fff;
+}
+
+.events-table .ant-table-tbody > tr:hover > td {
+    background: #404040;
+}
+
+.events-table .ant-empty-description {
+    color: #8c8c8c;
+}
+
+.events-table .ant-pagination-item {
+    background: #2f2f2f;
+    border-color: #404040;
+}
+
+.events-table .ant-pagination-item a {
+    color: #fff;
+}
+
+.events-table .ant-pagination-item-active {
+    background: #1890ff;
+    border-color: #1890ff;
+}
+
+.events-table .ant-pagination-prev button,
+.events-table .ant-pagination-next button {
+    background: #2f2f2f;
+    border-color: #404040;
+    color: #fff;
+}
+
+.calendarCard {
+    height: 100%;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cardTitle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.titleIcon {
+    font-size: 24px;
+    color: #1890ff;
+}
+
+.cardTitle h4 {
+    margin: 0 !important;
+    color: #fff !important;
+}
+
+.iframeWrapper {
+    width: 100%;
+    height: calc(100% - 80px);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.iframeWrapper iframe {
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+}
+
+.investing-calendar {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.economic-calendar-card {
+    background: #0c0d0e !important;
+    border: 1px solid #1f1f1f !important;
+    border-radius: 8px;
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+.economic-calendar-card .ant-card-body {
+    padding: 0;
+    height: 100%;
+}
+
+.economic-calendar-card .ant-card-head {
+    border-bottom: none;
+}
+
+.calendarContainer {
+    padding: 20px;
+    height: 100%;
+}
+
+.economic-calendar-card .ant-table {
+    background: var(--primary-background);
+    border-radius: 8px;
+}
+
+.economic-calendar-card .ant-table-thead > tr > th {
+    background: var(--secondary-background);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+}
+
+.economic-calendar-card .ant-table-tbody > tr > td {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.economic-calendar-card .ant-table-tbody > tr:hover > td {
+    background: var(--hover-background);
+    cursor: pointer;
+}
+
+.economic-calendar-card .ant-table-expanded-row > td {
+    background: var(--secondary-background);
+}
+
+.economic-calendar-card .ant-table-row-expand-icon {
+    background: var(--primary-background);
+}
+
+.economic-calendar-card .ant-statistic {
+    background: var(--primary-background);
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.economic-calendar-card .ant-statistic-title {
+    color: var(--text-color);
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.economic-calendar-card .ant-space {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.economic-calendar-card .ant-space-item {
+    margin-bottom: 0;
+}
+
+.economic-calendar-card .ant-select {
+    width: 100%;
+    min-width: 120px;
+}
+
+.economic-calendar-card .ant-picker {
+    width: 100%;
+    min-width: 230px;
+}
+
+.economic-calendar-card .ant-tag {
+    margin-right: 8px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.economic-calendar-card .ant-badge {
+    margin-left: 8px;
+}
+
+.economic-calendar-card .ant-badge-count {
+    background: var(--primary-color);
+}
+
+.economic-calendar-card .ant-table-cell img {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.economic-calendar-card .ant-pagination {
+    margin-top: 16px;
+    margin-bottom: 0;
+    padding: 16px;
+    background: var(--secondary-background);
+    border-radius: 0 0 8px 8px;
+}
+
+.economic-calendar-card .ant-table-filter-trigger {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.economic-calendar-card .ant-table-filter-trigger:hover {
+    color: #1890ff;
+    background: rgba(24, 144, 255, 0.1);
+}
+
+.economic-calendar-card .ant-btn-icon-only {
+    width: 32px;
+    height: 32px;
+}
+
+.investing-calendar-container {
+    margin: 24px 0;
+    background: #2f2f2f;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.investing-calendar-wrapper {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #1f1f1f;
+}
+
+.calendar-iframe {
+    background: #1f1f1f;
+}
+
+.poweredBy {
+    margin-top: 12px;
+    text-align: center;
+}
+
+.poweredBy span {
+    font-size: 11px;
+    color: #8c8c8c;
+}
+
+.poweredBy .underline_link {
+    font-size: 11px;
+    color: #1890ff;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.poweredBy .underline_link:hover {
+    text-decoration: underline;
+    color: #40a9ff;
+}
+
+.custom-calendar-section {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #363636;
+}
+
+.section-header {
+    margin-bottom: 24px;
+}
+
+.section-header h3 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .economic-calendar {
+        padding: 12px;
+    }
+
+    .calendar-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .header-right {
+        width: 100%;
+    }
+
+    .refresh-button {
+        width: 100%;
+    }
+
+    .stat-card {
+        margin-bottom: 16px;
+    }
+
+    .calendar-stats {
+        margin: 16px 0;
+        padding: 16px;
+    }
+
+    .economic-calendar-card .ant-table {
+        font-size: 12px;
+    }
+
+    .economic-calendar-card .ant-statistic-title {
+        font-size: 12px;
+    }
+
+    .economic-calendar-card .ant-statistic-content {
+        font-size: 20px;
+    }
+
+    .filters-container {
+        margin: 16px 0;
+    }
+
+    .filters-container .ant-col {
+        margin-bottom: 12px;
+    }
+
+    .investing-calendar-container {
+        margin: 16px 0;
+        padding: 12px;
+    }
+
+    .custom-calendar-section {
+        margin-top: 24px;
+        padding-top: 16px;
+    }
+}

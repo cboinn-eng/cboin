@@ -1,0 +1,50 @@
+.portfolio-container {
+    padding: 24px;
+}
+
+.portfolio-summary {
+    margin-bottom: 24px;
+}
+
+.portfolio-content {
+    background: #fff;
+    border-radius: 8px;
+}
+
+.coin-details {
+    padding: 16px;
+    background: #fafafa;
+}
+
+.ant-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ant-tabs-nav {
+    margin-bottom: 16px;
+}
+
+.ant-list-item {
+    padding: 8px 0;
+}
+
+.ant-statistic-title {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.ant-statistic-content {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.ant-table-expanded-row > .ant-table-cell {
+    background: #fafafa;
+}
+
+.ant-tag {
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin: 4px 0;
+}

@@ -1,0 +1,87 @@
+.market-status-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 16px;
+  background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.market-status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(145deg, #2a2a2a, #333333);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.market-status-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.market-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.market-icon {
+  font-size: 1.3em;
+  opacity: 0.9;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.status-badge.open {
+  background: linear-gradient(145deg, #1e9d24, #2ebd35);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(46, 189, 53, 0.3);
+}
+
+.status-badge.closed {
+  background: linear-gradient(145deg, #d32f2f, #f44336);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+}
+
+.status-badge.half {
+  background: linear-gradient(145deg, #f57c00, #ff9800);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+}
+
+/* Animasyon efektleri */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.market-status-item.active {
+  animation: pulse 2s infinite;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}

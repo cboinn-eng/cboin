@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: cboin-trading-bot
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      - key: CRYPTOCOMPARE_API_KEY
+        sync: false
+      - key: BINANCE_API_KEY
+        sync: false
+      - key: BINANCE_API_SECRET
+        sync: false
+
+  - type: worker
+    name: cboin-ping-worker
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && python ping.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0

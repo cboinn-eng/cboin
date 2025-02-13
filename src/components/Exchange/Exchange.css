@@ -1,0 +1,48 @@
+.exchange-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.exchange-card .ant-card-head {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.exchange-card .ant-card-head-title {
+  color: #ffffff;
+}
+
+.exchange-card .ant-form-item-label > label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.exchange-card .ant-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.exchange-card .ant-input:hover,
+.exchange-card .ant-input:focus {
+  border-color: #1890ff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.exchange-card .ant-select-selector {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+.exchange-card .ant-select-selection-item {
+  color: #ffffff !important;
+}
+
+.exchange-card .ant-btn-primary {
+  background: #1890ff;
+  border: none;
+}
+
+.exchange-card .ant-btn-primary:hover {
+  background: #40a9ff;
+}

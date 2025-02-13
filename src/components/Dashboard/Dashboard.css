@@ -1,0 +1,279 @@
+.dashboard-container {
+    padding: 24px;
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.dashboard-header {
+    margin-bottom: 32px;
+}
+
+.dashboard-header h2 {
+    margin: 0;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.dashboard-subtitle {
+    color: var(--text-secondary);
+    margin: 8px 0 0;
+    font-size: 16px;
+}
+
+/* İstatistik Kartları */
+.stat-card {
+    height: 160px;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+    transition: var(--transition-normal);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+}
+
+.stat-content h3 {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0 0 8px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+}
+
+.stat-change {
+    font-size: 14px;
+    margin: 0;
+}
+
+.stat-change.positive {
+    color: var(--success);
+}
+
+.stat-change.negative {
+    color: var(--danger);
+}
+
+/* Grafik Kartı */
+.chart-card {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px !important;
+    height: 500px;
+}
+
+.chart-card .ant-card-head {
+    background: var(--bg-tertiary);
+    border-radius: 16px 16px 0 0;
+}
+
+.chart-card .ant-card-head-title {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Sosyal Medya Kartı */
+.social-card {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px !important;
+    height: 500px;
+    overflow: hidden;
+}
+
+.social-card .ant-card-head {
+    background: var(--bg-tertiary);
+    border-radius: 16px 16px 0 0;
+}
+
+.social-card .ant-card-head-title {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.stats-row .ant-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.stats-row .ant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.47);
+}
+
+.stats-row .ant-statistic-title {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.stats-row .ant-statistic-content {
+    color: white;
+}
+
+.chart-row .ant-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+}
+
+.chart-row .ant-card-head {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-row .ant-card-head-title {
+    color: white;
+}
+
+.content-row .ant-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    height: 100%;
+}
+
+.content-row .ant-card-head {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.content-row .ant-card-head-title {
+    color: white;
+}
+
+.news-card .ant-list-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+}
+
+.news-card .ant-list-item-meta-title {
+    margin-bottom: 8px;
+}
+
+.news-card .ant-list-item-meta-title a {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.news-card .ant-list-item-meta-description {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.news-card .ant-tag {
+    margin-top: 8px;
+}
+
+.predictions-card .ant-list-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 0;
+}
+
+.predictions-card .ant-list-item-meta-title {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.predictions-card .ant-list-item-meta-description {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.twitter-card {
+    margin-top: 16px;
+}
+
+.twitter-card .ant-list-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+}
+
+.twitter-card .ant-list-item-meta {
+    align-items: flex-start;
+}
+
+.twitter-card .ant-list-item-meta-title {
+    margin-bottom: 4px;
+}
+
+.twitter-card .ant-list-item-meta-description {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.twitter-card .ant-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.twitter-card img {
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.twitter-card img:hover {
+    transform: scale(1.05);
+}
+
+.twitter-card .ant-space {
+    flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 16px;
+    }
+    
+    .stat-card {
+        height: auto;
+        margin-bottom: 16px;
+    }
+    
+    .chart-card,
+    .social-card {
+        height: auto;
+        min-height: 400px;
+    }
+
+    .stats-row .ant-card,
+    .chart-row .ant-card,
+    .content-row .ant-card {
+        margin-bottom: 16px;
+    }
+
+    .news-card .ant-list-item-extra {
+        margin-left: 0;
+        margin-bottom: 16px;
+    }
+
+    .news-card .ant-list-item-extra img {
+        width: 100%;
+        height: auto;
+    }
+}

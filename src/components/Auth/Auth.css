@@ -1,0 +1,112 @@
+:root {
+    --primary-color: #1890ff;
+    --secondary-color: #f7931a;
+    --text-color: #2f3542;
+    --border-color: #e8e8e8;
+    --background-color: #f5f6fa;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../../assets/images/gradient-technology-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+.auth-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.auth-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    z-index: 2;
+}
+
+.auth-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.auth-box h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.auth-box .ant-form-item-label > label {
+    color: white;
+}
+
+.auth-box .ant-input-affix-wrapper {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.auth-box .ant-input {
+    background: transparent;
+    color: white;
+}
+
+.auth-box .ant-input-password-icon {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.auth-box .ant-btn {
+    height: 45px;
+    font-size: 1.1rem;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.auth-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.auth-links a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .auth-box {
+        padding: 1.5rem;
+    }
+
+    .auth-logo {
+        width: 100px;
+    }
+
+    .auth-box h2 {
+        font-size: 1.5rem;
+    }
+}

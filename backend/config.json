@@ -1,0 +1,13 @@
+{
+    "binance": {
+        "api_key": "",
+        "api_secret": "",
+        "testnet": true
+    },
+    "trading": {
+        "position_size": 0.01,
+        "max_open_trades": 3,
+        "stop_loss_percent": 2.0,
+        "take_profit_percent": 4.0
+    }
+}

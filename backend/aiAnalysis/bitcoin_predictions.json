@@ -1,0 +1,732 @@
+{
+    "last_update": "2025-01-25 21:38:51",
+    "predictions": [
+        {
+            "date": "2025-01-26",
+            "current_price": 105090.37,
+            "prediction": 105719.25952156007,
+            "lower_bound": 103488.72025866843,
+            "upper_bound": 107949.79878445172,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-01-27",
+            "current_price": 105090.37,
+            "prediction": 106045.49878565047,
+            "lower_bound": 102905.34739513343,
+            "upper_bound": 109185.65017616752,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-01-28",
+            "current_price": 105090.37,
+            "prediction": 105723.4484381241,
+            "lower_bound": 101896.43315384707,
+            "upper_bound": 109550.46372240114,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-01-29",
+            "current_price": 105090.37,
+            "prediction": 105264.93613549967,
+            "lower_bound": 100850.1738456967,
+            "upper_bound": 109679.69842530263,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-01-30",
+            "current_price": 105090.37,
+            "prediction": 105715.46753867582,
+            "lower_bound": 100770.54502614691,
+            "upper_bound": 110660.39005120473,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-01-31",
+            "current_price": 105090.37,
+            "prediction": 106158.69066436814,
+            "lower_bound": 100737.33536517502,
+            "upper_bound": 111580.04596356126,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-01",
+            "current_price": 105090.37,
+            "prediction": 106069.03170029826,
+            "lower_bound": 100220.48125006465,
+            "upper_bound": 111917.58215053187,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-02",
+            "current_price": 105090.37,
+            "prediction": 105612.88816312472,
+            "lower_bound": 99370.80947784477,
+            "upper_bound": 111854.96684840467,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-03",
+            "current_price": 105090.37,
+            "prediction": 105755.97355342271,
+            "lower_bound": 99134.7355213366,
+            "upper_bound": 112377.21158550882,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-04",
+            "current_price": 105090.37,
+            "prediction": 106463.69249862111,
+            "lower_bound": 99480.18280794406,
+            "upper_bound": 113447.20218929816,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-05",
+            "current_price": 105090.37,
+            "prediction": 106490.94605915785,
+            "lower_bound": 99170.15879121989,
+            "upper_bound": 113811.73332709582,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-06",
+            "current_price": 105090.37,
+            "prediction": 106062.11282028416,
+            "lower_bound": 98424.27084271892,
+            "upper_bound": 113699.95479784941,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-07",
+            "current_price": 105090.37,
+            "prediction": 105756.18060429358,
+            "lower_bound": 97809.02203184986,
+            "upper_bound": 113703.3391767373,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-08",
+            "current_price": 105090.37,
+            "prediction": 106315.74252103179,
+            "lower_bound": 98064.42661517755,
+            "upper_bound": 114567.05842688603,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-09",
+            "current_price": 105090.37,
+            "prediction": 106808.79719604782,
+            "lower_bound": 98263.32479979855,
+            "upper_bound": 115354.26959229709,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-10",
+            "current_price": 105090.37,
+            "prediction": 106590.7984686649,
+            "lower_bound": 97767.79189419637,
+            "upper_bound": 115413.80504313343,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-11",
+            "current_price": 105090.37,
+            "prediction": 106242.74837069222,
+            "lower_bound": 97150.16782998109,
+            "upper_bound": 115335.32891140335,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-12",
+            "current_price": 105090.37,
+            "prediction": 106310.31889700246,
+            "lower_bound": 96949.35107118922,
+            "upper_bound": 115671.28672281571,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-13",
+            "current_price": 105090.37,
+            "prediction": 106946.31296972645,
+            "lower_bound": 97322.97360002846,
+            "upper_bound": 116569.65233942444,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-14",
+            "current_price": 105090.37,
+            "prediction": 106922.69223897204,
+            "lower_bound": 97049.75153253811,
+            "upper_bound": 116795.63294540597,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-15",
+            "current_price": 105090.37,
+            "prediction": 106506.12026619673,
+            "lower_bound": 96392.80924525872,
+            "upper_bound": 116619.43128713474,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-16",
+            "current_price": 105090.37,
+            "prediction": 106421.98803321885,
+            "lower_bound": 96066.44463395559,
+            "upper_bound": 116777.53143248211,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-17",
+            "current_price": 105090.37,
+            "prediction": 107002.39999474675,
+            "lower_bound": 96405.83762595853,
+            "upper_bound": 117598.96236353497,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-18",
+            "current_price": 105090.37,
+            "prediction": 107471.6437021328,
+            "lower_bound": 96642.5883934592,
+            "upper_bound": 118300.6990108064,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-19",
+            "current_price": 105090.37,
+            "prediction": 106990.73442505061,
+            "lower_bound": 95939.10449407212,
+            "upper_bound": 118042.36435602911,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-20",
+            "current_price": 105090.37,
+            "prediction": 106645.74599964061,
+            "lower_bound": 95374.43203098977,
+            "upper_bound": 117917.05996829145,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-21",
+            "current_price": 105090.37,
+            "prediction": 106871.83999448728,
+            "lower_bound": 95379.74742096908,
+            "upper_bound": 118363.93256800548,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-22",
+            "current_price": 105090.37,
+            "prediction": 107508.95813874608,
+            "lower_bound": 95800.12976951066,
+            "upper_bound": 119217.7865079815,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-23",
+            "current_price": 105090.37,
+            "prediction": 107495.00757592282,
+            "lower_bound": 95575.93838065135,
+            "upper_bound": 119414.07677119429,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-24",
+            "current_price": 105090.37,
+            "prediction": 107046.1314990459,
+            "lower_bound": 94922.10484262073,
+            "upper_bound": 119170.15815547109,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-25",
+            "current_price": 105090.37,
+            "prediction": 107133.64366146707,
+            "lower_bound": 94803.6950808009,
+            "upper_bound": 119463.59224213324,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-26",
+            "current_price": 105090.37,
+            "prediction": 107563.32822341898,
+            "lower_bound": 95027.92632240994,
+            "upper_bound": 120098.73012442802,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-27",
+            "current_price": 105090.37,
+            "prediction": 107874.74022388035,
+            "lower_bound": 95140.58509182115,
+            "upper_bound": 120608.89535593954,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-02-28",
+            "current_price": 105090.37,
+            "prediction": 107391.77431539983,
+            "lower_bound": 94465.71167632221,
+            "upper_bound": 120317.83695447745,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-01",
+            "current_price": 105090.37,
+            "prediction": 107159.68525265483,
+            "lower_bound": 94042.4105445708,
+            "upper_bound": 120276.95996073887,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-02",
+            "current_price": 105090.37,
+            "prediction": 107589.40548647202,
+            "lower_bound": 94277.05442695961,
+            "upper_bound": 120901.75654598443,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-03",
+            "current_price": 105090.37,
+            "prediction": 108141.52495710063,
+            "lower_bound": 94637.71410091978,
+            "upper_bound": 121645.33581328148,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-04",
+            "current_price": 105090.37,
+            "prediction": 108089.88045307825,
+            "lower_bound": 94401.75252987398,
+            "upper_bound": 121778.00837628252,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-05",
+            "current_price": 105090.37,
+            "prediction": 107479.40826422509,
+            "lower_bound": 93609.97364631093,
+            "upper_bound": 121348.84288213924,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-06",
+            "current_price": 105090.37,
+            "prediction": 107614.51022981002,
+            "lower_bound": 93561.9466671034,
+            "upper_bound": 121667.07379251665,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-07",
+            "current_price": 105090.37,
+            "prediction": 108115.19420291508,
+            "lower_bound": 93880.05049939557,
+            "upper_bound": 122350.3379064346,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-08",
+            "current_price": 105090.37,
+            "prediction": 108356.82501300522,
+            "lower_bound": 93944.94282924799,
+            "upper_bound": 122768.70719676245,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-09",
+            "current_price": 105090.37,
+            "prediction": 107949.31554762661,
+            "lower_bound": 93363.56323959983,
+            "upper_bound": 122535.0678556534,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-10",
+            "current_price": 105090.37,
+            "prediction": 107775.54196968956,
+            "lower_bound": 93015.39994817741,
+            "upper_bound": 122535.6839912017,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-11",
+            "current_price": 105090.37,
+            "prediction": 108338.76369642251,
+            "lower_bound": 93402.75647564145,
+            "upper_bound": 123274.77091720357,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-12",
+            "current_price": 105090.37,
+            "prediction": 108638.25375414226,
+            "lower_bound": 93529.90404846637,
+            "upper_bound": 123746.60345981816,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-13",
+            "current_price": 105090.37,
+            "prediction": 108435.94167044404,
+            "lower_bound": 93161.0380899428,
+            "upper_bound": 123710.84525094528,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-14",
+            "current_price": 105090.37,
+            "prediction": 107927.18063173382,
+            "lower_bound": 92487.24474673253,
+            "upper_bound": 123367.11651673511,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-15",
+            "current_price": 105090.37,
+            "prediction": 108199.46926731085,
+            "lower_bound": 92592.40742333702,
+            "upper_bound": 123806.53111128468,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-16",
+            "current_price": 105090.37,
+            "prediction": 108807.67776342548,
+            "lower_bound": 93032.42678244248,
+            "upper_bound": 124582.92874440849,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-17",
+            "current_price": 105090.37,
+            "prediction": 108910.98699428575,
+            "lower_bound": 92972.85354799253,
+            "upper_bound": 124849.12044057896,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-18",
+            "current_price": 105090.37,
+            "prediction": 108545.44758320629,
+            "lower_bound": 92448.00446704806,
+            "upper_bound": 124642.89069936452,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-19",
+            "current_price": 105090.37,
+            "prediction": 108287.37093695287,
+            "lower_bound": 92029.32830745983,
+            "upper_bound": 124545.4135664459,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-20",
+            "current_price": 105090.37,
+            "prediction": 108842.16741074476,
+            "lower_bound": 92422.33231561517,
+            "upper_bound": 125262.00250587435,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-21",
+            "current_price": 105090.37,
+            "prediction": 109118.62822961679,
+            "lower_bound": 92540.56474402436,
+            "upper_bound": 125696.69171520922,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-22",
+            "current_price": 105090.37,
+            "prediction": 108873.90263852035,
+            "lower_bound": 92142.38192816322,
+            "upper_bound": 125605.42334887748,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-23",
+            "current_price": 105090.37,
+            "prediction": 108542.63539229789,
+            "lower_bound": 91656.30521868807,
+            "upper_bound": 125428.96556590771,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-24",
+            "current_price": 105090.37,
+            "prediction": 108876.85943906382,
+            "lower_bound": 91833.620159141,
+            "upper_bound": 125920.09871898663,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-25",
+            "current_price": 105090.37,
+            "prediction": 109517.93306884743,
+            "lower_bound": 92319.10940745316,
+            "upper_bound": 126716.7567302417,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-26",
+            "current_price": 105090.37,
+            "prediction": 109334.52218515331,
+            "lower_bound": 91984.91176520709,
+            "upper_bound": 126684.13260509954,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-27",
+            "current_price": 105090.37,
+            "prediction": 108908.32550249276,
+            "lower_bound": 91410.34517574742,
+            "upper_bound": 126406.3058292381,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-28",
+            "current_price": 105090.37,
+            "prediction": 108813.21202843881,
+            "lower_bound": 91165.12468868357,
+            "upper_bound": 126461.29936819404,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-29",
+            "current_price": 105090.37,
+            "prediction": 109434.00604637267,
+            "lower_bound": 91635.0655620541,
+            "upper_bound": 127232.94653069125,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-30",
+            "current_price": 105090.37,
+            "prediction": 109735.359832394,
+            "lower_bound": 91787.4597394556,
+            "upper_bound": 127683.25992533239,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-03-31",
+            "current_price": 105090.37,
+            "prediction": 109398.2611708096,
+            "lower_bound": 91305.31237952874,
+            "upper_bound": 127491.20996209045,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-01",
+            "current_price": 105090.37,
+            "prediction": 109205.26616719703,
+            "lower_bound": 90966.95034411729,
+            "upper_bound": 127443.58199027677,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-02",
+            "current_price": 105090.37,
+            "prediction": 109438.54459208145,
+            "lower_bound": 91052.91548712144,
+            "upper_bound": 127824.17369704146,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-03",
+            "current_price": 105090.37,
+            "prediction": 109970.1373838217,
+            "lower_bound": 91438.89383143556,
+            "upper_bound": 128501.38093620783,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-04",
+            "current_price": 105090.37,
+            "prediction": 109749.68158235977,
+            "lower_bound": 91077.14879521757,
+            "upper_bound": 128422.21436950198,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-05",
+            "current_price": 105090.37,
+            "prediction": 109377.58016528924,
+            "lower_bound": 90565.26043128053,
+            "upper_bound": 128189.89989929795,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-06",
+            "current_price": 105090.37,
+            "prediction": 109503.16571137236,
+            "lower_bound": 90547.45388170882,
+            "upper_bound": 128458.87754103591,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-07",
+            "current_price": 105090.37,
+            "prediction": 110102.76078247557,
+            "lower_bound": 91003.39486265309,
+            "upper_bound": 129202.12670229805,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-08",
+            "current_price": 105090.37,
+            "prediction": 110368.72300386119,
+            "lower_bound": 91129.36018263946,
+            "upper_bound": 129608.08582508292,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-09",
+            "current_price": 105090.37,
+            "prediction": 109807.11629177157,
+            "lower_bound": 90430.84036381276,
+            "upper_bound": 129183.39221973038,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-10",
+            "current_price": 105090.37,
+            "prediction": 109640.3602940745,
+            "lower_bound": 90126.23594974139,
+            "upper_bound": 129154.48463840762,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-11",
+            "current_price": 105090.37,
+            "prediction": 110000.89538432854,
+            "lower_bound": 90347.26107140978,
+            "upper_bound": 129654.5296972473,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-12",
+            "current_price": 105090.37,
+            "prediction": 110501.03372238882,
+            "lower_bound": 90709.96444905359,
+            "upper_bound": 130292.10299572405,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-13",
+            "current_price": 105090.37,
+            "prediction": 110311.55374572243,
+            "lower_bound": 90385.34158670703,
+            "upper_bound": 130237.76590473783,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-14",
+            "current_price": 105090.37,
+            "prediction": 109946.08281209863,
+            "lower_bound": 89885.45835301647,
+            "upper_bound": 130006.70727118079,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-15",
+            "current_price": 105090.37,
+            "prediction": 110233.862921187,
+            "lower_bound": 90036.80759513937,
+            "upper_bound": 130430.91824723463,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-16",
+            "current_price": 105090.37,
+            "prediction": 110641.05010997318,
+            "lower_bound": 90307.77614207822,
+            "upper_bound": 130974.32407786814,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-17",
+            "current_price": 105090.37,
+            "prediction": 110745.97772292393,
+            "lower_bound": 90280.05543079291,
+            "upper_bound": 131211.90001505494,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-18",
+            "current_price": 105090.37,
+            "prediction": 110222.90032488815,
+            "lower_bound": 89626.66365752791,
+            "upper_bound": 130819.13699224839,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-19",
+            "current_price": 105090.37,
+            "prediction": 110184.53004137466,
+            "lower_bound": 89456.63873988905,
+            "upper_bound": 130912.42134286027,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-20",
+            "current_price": 105090.37,
+            "prediction": 110712.91720138784,
+            "lower_bound": 89850.56055441378,
+            "upper_bound": 131575.27384836192,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-21",
+            "current_price": 105090.37,
+            "prediction": 111101.78115785298,
+            "lower_bound": 90107.34770368352,
+            "upper_bound": 132096.21461202245,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-22",
+            "current_price": 105090.37,
+            "prediction": 110902.31603262936,
+            "lower_bound": 89779.18972455894,
+            "upper_bound": 132025.44234069978,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-23",
+            "current_price": 105090.37,
+            "prediction": 110409.83893717955,
+            "lower_bound": 89158.0791173761,
+            "upper_bound": 131661.598756983,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-24",
+            "current_price": 105090.37,
+            "prediction": 110728.05965337803,
+            "lower_bound": 89345.69393462004,
+            "upper_bound": 132110.42537213603,
+            "confidence": 0.95
+        },
+        {
+            "date": "2025-04-25",
+            "current_price": 105090.37,
+            "prediction": 111166.56525432871,
+            "lower_bound": 89654.27314161781,
+            "upper_bound": 132678.85736703963,
+            "confidence": 0.95
+        }
+    ],
+    "model_info": {
+        "type": "SARIMA-based prediction",
+        "trend": "Annual 100% growth assumption",
+        "seasonality": "Weekly cycle with ±1% effect",
+        "confidence_interval": "95%",
+        "prediction_days": 90
+    }
+}

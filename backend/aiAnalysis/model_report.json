@@ -1,0 +1,19 @@
+{
+    "model_info": {
+        "veri_baslangic": "2010-07-18",
+        "veri_bitis": "2025-01-17",
+        "veri_sayisi": 5261,
+        "model_tipi": "SARIMA(2,1,2)(1,1,1,7)",
+        "aic": 85989.7298973995,
+        "bic": 86035.68244132752
+    },
+    "tahmin_ozeti": {
+        "baslangic_tarihi": "2025-01-18",
+        "bitis_tarihi": "2025-04-17",
+        "tahmin_sayisi": 90,
+        "minimum_tahmin": 105407.19667666382,
+        "maximum_tahmin": 111658.34258995809,
+        "ortalama_tahmin": 108584.53611889394
+    },
+    "son_guncelleme": "2025-01-18 22:15:59"
+}
