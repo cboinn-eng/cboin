@@ -28,6 +28,7 @@ import Landing from './components/Auth/Landing';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import RssNews from './components/RssNews/RssNews';
+import BitcoinPrediction from './components/BitcoinPrediction';
 
 import 'antd/dist/reset.css';
 import './App.css';
@@ -98,6 +99,11 @@ const App = () => {
       icon: <LineChartOutlined />,
       label: <Link to="/market">Kripto Market</Link>,
     },
+    {
+      key: '/bitcoin-prediction',
+      icon: <LineChartOutlined />,
+      label: <Link to="/bitcoin-prediction">Bitcoin Tahmini</Link>,
+    },
   ];
 
   return (
@@ -132,6 +138,7 @@ const App = () => {
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/twitter" element={<TwitterFeed username="ivy_cboinn" />} />
                 <Route path="/market" element={<CoinMarket />} />
+                <Route path="/bitcoin-prediction" element={<BitcoinPrediction />} />
               </Routes>
             </Content>
             <Footer className="app-footer">
