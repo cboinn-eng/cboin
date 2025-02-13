@@ -2,6 +2,7 @@ import json
 import aiohttp
 import asyncio
 import logging
+import os
 from datetime import datetime
 from typing import List, Dict, Optional
 from selenium import webdriver
@@ -88,7 +89,8 @@ class EmtiaMarketAnalyzer:
 async def main():
     """Test fonksiyonu"""
     try:
-        api_key = "EeCzp3KmtjxN9I0ZBbLrwIsDQljf24cz"
+        # Get API key from environment variable
+        api_key = os.getenv("EMTIA_API_KEY", "EeCzp3KmtjxN9I0ZBbLrwIsDQljf24cz")
         analyzer = EmtiaMarketAnalyzer(api_key)
         
         # Tüm emtia verilerini al

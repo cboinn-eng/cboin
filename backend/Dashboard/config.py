@@ -1,7 +1,9 @@
 """Configuration settings for the NASDAQ Market Analyzer."""
 
+import os
+
 # API Configuration
-API_KEY = "EeCzp3KmtjxN9I0ZBbLrwIsDQljf24cz"
+API_KEY = os.getenv("EMTIA_API_KEY", "EeCzp3KmtjxN9I0ZBbLrwIsDQljf24cz")
 BASE_URL = "https://financialmodelingprep.com/api/v3/quote"
 
 # Watched Symbols Configuration

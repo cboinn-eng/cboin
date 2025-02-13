@@ -2,6 +2,7 @@ from typing import List, Dict
 import tweepy
 import logging
 import json
+import os
 
 # Detaylı loglama ayarları
 logging.basicConfig(level=logging.INFO)
@@ -9,12 +10,12 @@ logger = logging.getLogger(__name__)
 
 class TwitterService:
     def __init__(self):
-        # Twitter API v2 credentials
-        self.api_key = "2QbYBxSKRNuOmwHPEGxGnYQPi"
-        self.api_secret = "aBXZxkUqMDfOlzNBtZIxF2qjmJmYXrxSEv5FIbYlIRCrWVLEEy"
-        self.access_token = "1747932258453893120-vqknInJajGvrI8EJOUMi5r56WzvzJE"
-        self.access_token_secret = "nbI6RWbBqi4N8Rqu51QcDLEgYC9BW8RobfsihujKOBzX6"
-        self.bearer_token = "AAAAAAAAAAAAAAAAAAAAAEyVzAEAAAAAj5QHhp6MNovqjv679NH9u91uMks%3DfBc5q9lW4v6FOQTBAF1El1t6J7hIfZ7MnxH12jdMBOdUPnUcw6"
+        # Twitter API v2 credentials from environment variables
+        self.api_key = os.getenv("TWITTER_API_KEY", "2QbYBxSKRNuOmwHPEGxGnYQPi")
+        self.api_secret = os.getenv("TWITTER_API_SECRET", "aBXZxkUqMDfOlzNBtZIxF2qjmJmYXrxSEv5FIbYlIRCrWVLEEy")
+        self.access_token = os.getenv("TWITTER_ACCESS_TOKEN", "1747932258453893120-vqknInJajGvrI8EJOUMi5r56WzvzJE")
+        self.access_token_secret = os.getenv("TWITTER_ACCESS_TOKEN_SECRET", "nbI6RWbBqi4N8Rqu51QcDLEgYC9BW8RobfsihujKOBzX6")
+        self.bearer_token = os.getenv("TWITTER_BEARER_TOKEN", "AAAAAAAAAAAAAAAAAAAAAEyVzAEAAAAAj5QHhp6MNovqjv679NH9u91uMks%3DfBc5q9lW4v6FOQTBAF1El1t6J7hIfZ7MnxH12jdMBOdUPnUcw6")
         
         try:
             # Initialize Twitter API v2 client
