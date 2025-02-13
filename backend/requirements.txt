@@ -17,8 +17,8 @@ alembic==1.7.1
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 python-multipart==0.0.5
-requests==2.26.0
+requests>=2.27.0
 websockets==9.1
 aiohttp==3.7.4
-python-binance==1.0.15
+python-binance>=1.0.15
 tweepy==4.12.1
