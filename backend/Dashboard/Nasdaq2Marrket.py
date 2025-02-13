@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import json
 import logging
+import os
 
 # Logging ayarları
 logging.basicConfig(level=logging.INFO)
@@ -20,8 +21,10 @@ class NasdaqMarketAnalyzer:
         self.options.add_argument('--disable-dev-shm-usage')
         self.options.add_argument('--disable-gpu')
         self.options.add_argument('--remote-debugging-port=9222')
-        self.options.binary_location = '/usr/bin/google-chrome'
-        self.driver = webdriver.Chrome(options=self.options)
+        self.options.binary_location = os.getenv('CHROME_BIN', '/usr/bin/google-chrome')
+        
+        service = Service(executable_path=os.getenv('CHROME_DRIVER', '/usr/bin/chromedriver'))
+        self.driver = webdriver.Chrome(service=service, options=self.options)
         self.is_running = False
         logger.info("NasdaqMarketAnalyzer initialized")
 
