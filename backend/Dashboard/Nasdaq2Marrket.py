@@ -1,6 +1,8 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-from time import sleep
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import logging
@@ -11,22 +13,14 @@ logger = logging.getLogger(__name__)
 
 class NasdaqMarketAnalyzer:
     def __init__(self):
-        self.driver = None
+        self.options = Options()
+        self.options.add_argument('--headless')
+        self.options.add_argument('--no-sandbox')
+        self.options.add_argument('--disable-dev-shm-usage')
+        self.service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=self.service, options=self.options)
         self.is_running = False
         logger.info("NasdaqMarketAnalyzer initialized")
-
-    def start_driver(self):
-        if self.driver is None:
-            try:
-                chrome_options = webdriver.ChromeOptions()
-                chrome_options.add_argument("--incognito")
-                chrome_options.add_argument("--headless")
-                self.driver = webdriver.Chrome(options=chrome_options)
-                self.driver.delete_all_cookies()
-                logger.info("WebDriver started successfully")
-            except Exception as e:
-                logger.error(f"Error starting WebDriver: {str(e)}")
-                raise
 
     def stop_driver(self):
         if self.driver:
@@ -38,9 +32,6 @@ class NasdaqMarketAnalyzer:
                 logger.error(f"Error stopping WebDriver: {str(e)}")
 
     def get_price(self):
-        if not self.driver:
-            self.start_driver()
-        
         try:
             self.driver.get("https://tr.tradingview.com/chart/KU6okxb3/")
             self.driver.implicitly_wait(10)
@@ -57,20 +48,19 @@ class NasdaqMarketAnalyzer:
 
     def start_monitoring(self):
         self.is_running = True
-        self.start_driver()
         
         while self.is_running:
             try:
                 price = self.get_price()
                 if price:
                     print(price)
-                sleep(3)
+                time.sleep(3)
             except KeyboardInterrupt:
                 logger.info("Monitoring stopped by user")
                 self.stop_monitoring()
             except Exception as e:
                 logger.error(f"Error during monitoring: {str(e)}")
-                sleep(3)
+                time.sleep(3)
 
     def stop_monitoring(self):
         self.is_running = False
