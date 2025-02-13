@@ -39,3 +39,12 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
+
+  - type: web
+    name: cboin-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://cboin-api.onrender.com

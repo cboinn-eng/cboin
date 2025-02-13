@@ -3,6 +3,8 @@ import { Card, CardContent, Typography, Grid, Box } from '@mui/material';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:10000';
+
 const BitcoinPrediction = () => {
   const [predictions, setPredictions] = useState([]);
   const [latestPrice, setLatestPrice] = useState(null);
@@ -12,7 +14,7 @@ const BitcoinPrediction = () => {
     // Tahminleri al
     const fetchPredictions = async () => {
       try {
-        const response = await axios.get('http://localhost:10000/latest-predictions');
+        const response = await axios.get(`${API_URL}/latest-predictions`);
         setPredictions(response.data.predictions || []);
       } catch (error) {
         console.error('Tahminler alınamadı:', error);
@@ -22,7 +24,7 @@ const BitcoinPrediction = () => {
     // Model durumunu al
     const fetchModelStatus = async () => {
       try {
-        const response = await axios.get('http://localhost:10000/model-status');
+        const response = await axios.get(`${API_URL}/model-status`);
         setModelStatus(response.data.status);
       } catch (error) {
         console.error('Model durumu alınamadı:', error);
