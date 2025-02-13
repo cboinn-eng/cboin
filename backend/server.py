@@ -83,9 +83,9 @@ async def startup_event():
     """Server başlatıldığında çalışacak fonksiyon"""
     logger.info("Server başlatılıyor...")
     
-    # SARIMA modelini background task olarak başlat
+    # SARIMA model eğitimini başlat
     background_tasks = BackgroundTasks()
-    background_tasks.add_task(ai_analysis.schedule_loop)
+    background_tasks.add_task(ai_analysis.train_model, max_iter=10)  # İterasyon sayısını sınırla
     
     # İlk tahminleri hemen yap
     await ai_analysis.update_daily_price()
@@ -1020,5 +1020,15 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM, signal_handler)
     
     print("\n=== Trading Bot Server başlatılıyor... ===\n")
-    port = int(os.getenv("PORT", 8001))  # Render.com için PORT değişkenini kullan
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    
+    # Render.com için PORT değişkenini kullan, varsayılan olarak 10000
+    port = int(os.getenv("PORT", 10000))
+    
+    # Host'u 0.0.0.0 olarak ayarla ve workers sayısını sınırla
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=port,
+        workers=1,  # Worker sayısını sınırla
+        limit_max_requests=1000  # Maksimum istek sayısını sınırla
+    )

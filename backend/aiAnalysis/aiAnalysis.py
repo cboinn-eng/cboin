@@ -51,9 +51,132 @@ logging.basicConfig(
 
 class AiAnalysis:
     def __init__(self):
-        self.sarima_file = SARIMA_FILE
-        self.predictions_file = PREDICTIONS_FILE
         logging.info("AI Analyzer başlatıldı")
+        self.client = None
+        self.model = None
+        self.latest_predictions = None
+        self.is_training = False
+        
+        # Binance client'ı başlat
+        try:
+            self.client = Client(BINANCE_API_KEY, BINANCE_API_SECRET)
+        except Exception as e:
+            logging.error(f"Binance client başlatılamadı: {str(e)}")
+    
+    async def train_model(self, max_iter=10):
+        """SARIMA modelini eğit"""
+        if self.is_training:
+            return
+            
+        self.is_training = True
+        try:
+            # Bitcoin verilerini al
+            df = self.get_historical_data()
+            if df is None or df.empty:
+                logging.error("Veri alınamadı")
+                return
+                
+            logging.info("SARIMA model eğitimi başlatılıyor")
+            print(f"* Toplam {len(df)} günlük veri okundu")
+            print(f"* Veri aralığı: {df.index[0].strftime('%Y-%m-%d')} - {df.index[-1].strftime('%Y-%m-%d')}")
+            
+            # Veriyi train ve test olarak ayır
+            train_size = int(len(df) * 0.8)
+            train = df[:train_size]
+            
+            print("* Hiperparametre optimizasyonu yapılıyor...")
+            
+            # Auto ARIMA ile hiperparametre optimizasyonu
+            model = auto_arima(
+                train,
+                start_p=0, start_q=0,
+                max_p=2, max_q=2,  # p ve q değerlerini sınırla
+                m=7,  # Haftalık sezonsellik
+                seasonal=True,
+                d=1, D=0,  # Differencing parametreleri
+                trace=True,
+                error_action='ignore',
+                suppress_warnings=True,
+                stepwise=True,
+                max_order=4,  # Toplam parametre sayısını sınırla
+                maxiter=max_iter,  # İterasyon sayısını sınırla
+                n_fits=10  # Deneme sayısını sınırla
+            )
+            
+            self.model = model
+            
+            # Tahminleri güncelle
+            self.update_predictions(df)
+            
+        except Exception as e:
+            logging.error(f"Model eğitimi sırasında hata: {str(e)}")
+            traceback.print_exc()
+        finally:
+            self.is_training = False
+    
+    def update_predictions(self, df):
+        """Tahminleri güncelle"""
+        try:
+            if self.model is None:
+                return
+                
+            # Son 30 günün tahminini yap
+            forecast = self.model.predict(n_periods=30)
+            
+            # Tahminleri kaydet
+            predictions = []
+            last_date = df.index[-1]
+            
+            for i, pred in enumerate(forecast):
+                date = last_date + timedelta(days=i+1)
+                predictions.append({
+                    'date': date.strftime('%Y-%m-%d'),
+                    'price': float(pred)
+                })
+            
+            # Tahminleri dosyaya kaydet
+            with open(PREDICTIONS_FILE, 'w') as f:
+                json.dump(predictions, f)
+                
+            self.latest_predictions = predictions
+            
+        except Exception as e:
+            logging.error(f"Tahmin güncellenirken hata: {str(e)}")
+    
+    def get_historical_data(self):
+        """Tarihsel Bitcoin verilerini al"""
+        try:
+            if self.client is None:
+                return None
+                
+            # Son 2 yıllık veriyi al (bellek kullanımını azaltmak için)
+            klines = self.client.get_historical_klines(
+                "BTCUSDT",
+                Client.KLINE_INTERVAL_1DAY,
+                "2 years ago UTC"
+            )
+            
+            if not klines:
+                return None
+                
+            # DataFrame oluştur
+            df = pd.DataFrame(klines, columns=[
+                'timestamp', 'open', 'high', 'low', 'close',
+                'volume', 'close_time', 'quote_asset_volume',
+                'number_of_trades', 'taker_buy_base_asset_volume',
+                'taker_buy_quote_asset_volume', 'ignore'
+            ])
+            
+            # Sadece kapanış fiyatını al
+            df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
+            df.set_index('timestamp', inplace=True)
+            df = df['close'].astype(float)
+            
+            return df
+            
+        except Exception as e:
+            logging.error(f"Tarihsel veri alınırken hata: {str(e)}")
+            return None
 
     async def analyze(self):
         """Bitcoin fiyat tahminlerini analiz eder"""
@@ -67,7 +190,7 @@ class AiAnalysis:
                     print(f"* Yeni fiyat kaydedildi: {date}, ${price:,.2f}")
                     
                     # SARIMA modelini eğit
-                    await self.train_sarima_model()
+                    await self.train_model()
                     
                     # Tahminleri kaydet
                     await self.make_predictions()
@@ -85,7 +208,7 @@ class AiAnalysis:
             if not os.path.exists(PREDICTIONS_FILE):
                 # Tahmin dosyası yoksa, yeni tahminler yap
                 data = pd.read_csv(SARIMA_FILE)
-                model = await self.train_sarima_model()
+                model = await self.train_model()
                 if model:
                     await self.make_predictions(model, data)
                 else:
@@ -113,43 +236,48 @@ class AiAnalysis:
             logging.error(f"Tahminler alınırken hata: {str(e)}")
             return None
 
-    async def train_sarima_model(self):
-        """SARIMA modelini eğitir ve hiperparametre optimizasyonu yapar"""
+    async def get_bitcoin_price(self):
+        """Binance'den Bitcoin kapanış fiyatını alır"""
         try:
-            print("\n=== SARIMA Model Eğitimi Başlatılıyor ===")
-            logging.info("SARIMA model eğitimi başlatılıyor")
-            
-            # Veriyi oku
-            df = pd.read_csv(SARIMA_FILE)
-            df['Tarih'] = pd.to_datetime(df['Tarih'])
-            df = df.sort_values('Tarih')
-            df = df.set_index('Tarih')  # Tarihi index olarak ayarla
-            data = df['Kapanış'].astype(float)
-            
-            print(f"* Toplam {len(data)} günlük veri okundu")
-            print(f"* Veri aralığı: {data.index.min().strftime('%Y-%m-%d')} - {data.index.max().strftime('%Y-%m-%d')}")
-            
-            # Otomatik hiperparametre optimizasyonu ile SARIMA modeli eğit
-            print("* Hiperparametre optimizasyonu yapılıyor...")
-            model = auto_arima(data,
-                              seasonal=True,          # Mevsimsel bileşenleri etkinleştir
-                              m=7,                   # Mevsimsel periyot (haftalık)
-                              trace=True,            # Optimizasyon sürecini göster
-                              error_action='ignore', # Hataları görmezden gel
-                              suppress_warnings=True, # Uyarıları bastır
-                              stepwise=True)         # Adım adım optimizasyon yap
-        
-            print("* Model eğitimi tamamlandı")
-            print(f"* En iyi model parametreleri: {model.order}, {model.seasonal_order}")
-            
-            return model
-            
+            client = Client(BINANCE_API_KEY, BINANCE_API_SECRET)
+            # Son günün kapanış fiyatını al
+            klines = client.get_historical_klines("BTCUSDT", Client.KLINE_INTERVAL_1DAY, "1 day ago UTC")
+            if klines:
+                close_price = float(klines[0][4])  # Kapanış fiyatı
+                date = datetime.fromtimestamp(klines[0][0] / 1000).strftime('%Y-%m-%d')
+                return date, close_price
+            return None, None
         except Exception as e:
-            error_msg = f"Model eğitimi sırasında hata: {str(e)}"
-            print(error_msg)
-            logging.error(error_msg)
-            traceback.print_exc()
-            return None
+            logging.error(f"Bitcoin fiyatı alınırken hata: {str(e)}")
+            return None, None
+
+    async def save_price_to_csv(self, date, price):
+        """Bitcoin fiyatını CSV'nin 2. satırına kaydeder"""
+        try:
+            # Mevcut CSV'yi oku
+            rows = []
+            try:
+                with open(SARIMA_FILE, 'r', encoding='utf-8') as f:
+                    rows = f.readlines()
+            except FileNotFoundError:
+                rows = ["Tarih,Kapanış\n"]
+        
+            # Yeni veriyi 2. satıra ekle
+            new_row = f"{date},{price}\n"
+            if len(rows) < 2:
+                rows.append(new_row)
+            else:
+                rows.insert(1, new_row)
+        
+            # CSV'yi güncelle
+            with open(SARIMA_FILE, 'w', encoding='utf-8') as f:
+                f.writelines(rows)
+            
+            logging.info(f"Fiyat 2. satıra kaydedildi: {date}, {price}")
+            return True
+        except Exception as e:
+            logging.error(f"Fiyat kaydedilirken hata: {str(e)}")
+            return False
 
     async def make_predictions(self):
         try:
@@ -202,222 +330,6 @@ class AiAnalysis:
             print(f"Tahmin sırasında hata: {str(e)}")
             traceback.print_exc()
             return False
-
-    async def get_bitcoin_price(self):
-        """Binance'den Bitcoin kapanış fiyatını alır"""
-        try:
-            client = Client(BINANCE_API_KEY, BINANCE_API_SECRET)
-            # Son günün kapanış fiyatını al
-            klines = client.get_historical_klines("BTCUSDT", Client.KLINE_INTERVAL_1DAY, "1 day ago UTC")
-            if klines:
-                close_price = float(klines[0][4])  # Kapanış fiyatı
-                date = datetime.fromtimestamp(klines[0][0] / 1000).strftime('%Y-%m-%d')
-                return date, close_price
-            return None, None
-        except Exception as e:
-            logging.error(f"Bitcoin fiyatı alınırken hata: {str(e)}")
-            return None, None
-
-    async def save_price_to_csv(self, date, price):
-        """Bitcoin fiyatını CSV'nin 2. satırına kaydeder"""
-        try:
-            # Mevcut CSV'yi oku
-            rows = []
-            try:
-                with open(SARIMA_FILE, 'r', encoding='utf-8') as f:
-                    rows = f.readlines()
-            except FileNotFoundError:
-                rows = ["Tarih,Kapanış\n"]
-        
-            # Yeni veriyi 2. satıra ekle
-            new_row = f"{date},{price}\n"
-            if len(rows) < 2:
-                rows.append(new_row)
-            else:
-                rows.insert(1, new_row)
-        
-            # CSV'yi güncelle
-            with open(SARIMA_FILE, 'w', encoding='utf-8') as f:
-                f.writelines(rows)
-            
-            logging.info(f"Fiyat 2. satıra kaydedildi: {date}, {price}")
-            return True
-        except Exception as e:
-            logging.error(f"Fiyat kaydedilirken hata: {str(e)}")
-            return False
-
-    async def train_sarima_model(self):
-        """SARIMA modelini eğitir ve hiperparametre optimizasyonu yapar"""
-        try:
-            print("\n=== SARIMA Model Eğitimi Başlatılıyor ===")
-            logging.info("SARIMA model eğitimi başlatılıyor")
-            
-            # Veriyi oku
-            df = pd.read_csv(SARIMA_FILE)
-            df['Tarih'] = pd.to_datetime(df['Tarih'])
-            df = df.sort_values('Tarih')
-            df = df.set_index('Tarih')  # Tarihi index olarak ayarla
-            data = df['Kapanış'].astype(float)
-            
-            print(f"* Toplam {len(data)} günlük veri okundu")
-            print(f"* Veri aralığı: {data.index.min().strftime('%Y-%m-%d')} - {data.index.max().strftime('%Y-%m-%d')}")
-            
-            # Otomatik hiperparametre optimizasyonu ile SARIMA modeli eğit
-            print("* Hiperparametre optimizasyonu yapılıyor...")
-            model = auto_arima(data,
-                              seasonal=True,          # Mevsimsel bileşenleri etkinleştir
-                              m=7,                   # Mevsimsel periyot (haftalık)
-                              trace=True,            # Optimizasyon sürecini göster
-                              error_action='ignore', # Hataları görmezden gel
-                              suppress_warnings=True, # Uyarıları bastır
-                              stepwise=True)         # Adım adım optimizasyon yap
-        
-            print("* Model eğitimi tamamlandı")
-            print(f"* En iyi model parametreleri: {model.order}, {model.seasonal_order}")
-            
-            # Tahminleri yap ve kaydet
-            if await self.make_predictions(model, data):
-                print("* SARIMA modeli başarıyla eğitildi ve yeni tahminler kaydedildi")
-                logging.info("SARIMA modeli başarıyla eğitildi ve yeni tahminler kaydedildi")
-                return True
-            
-            return False
-        
-        except Exception as e:
-            error_msg = f"Model eğitimi sırasında hata: {str(e)}"
-            print(error_msg)
-            logging.error(error_msg)
-            traceback.print_exc()
-            return False
-
-    async def make_predictions(self, model, data):
-        """SARIMA modeliyle tahmin yapar ve kaydeder"""
-        try:
-            # Validation checks
-            if model is None:
-                raise ValueError("Model is not initialized")
-            if data is None or len(data) == 0:
-                raise ValueError("Input data is empty")
-
-            # Make 90 day forecast
-            forecast = model.get_forecast(steps=90)
-            predictions = np.asarray(forecast.predicted_mean)
-            conf_int = forecast.conf_int()
-
-            # Validate forecast results
-            if len(predictions) == 0:
-                raise ValueError("Empty predictions array")
-
-            # Generate dates range
-            last_date = data.index[-1]
-            dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=90, freq='D')
-
-            # Convert confidence intervals to numpy arrays
-            lower_bounds = np.asarray(conf_int['lower Kapanış'])
-            upper_bounds = np.asarray(conf_int['upper Kapanış'])
-
-            all_predictions = []
-            current_price = float(data.iloc[-1])
-
-            # Build predictions
-            for i in range(90):
-                pred = {
-                    'date': dates[i].strftime('%Y-%m-%d'),
-                    'current_price': current_price,
-                    'prediction': float(predictions[i]),
-                    'lower_bound': float(lower_bounds[i]),
-                    'upper_bound': float(upper_bounds[i]),
-                    'confidence': 0.95
-                }
-                all_predictions.append(pred)
-
-            # Save to CSV (eski tahminler silinip yeni tahminler yazılacak)
-            predictions_df = pd.DataFrame({
-                'Tarih': dates,
-                'Tahmin': predictions,
-                'Alt_Guven_Araligi': lower_bounds,
-                'Ust_Guven_Araligi': upper_bounds
-            })
-            predictions_df.to_csv(PREDICTIONS_CSV, index=False)
-
-            # Save to JSON (eski tahminler silinip yeni tahminler yazılacak)
-            results = {
-                'last_update': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                'predictions': all_predictions,
-                'model_info': {
-                    'type': 'SARIMA-based prediction',
-                    'trend': 'Annual 100% growth assumption', 
-                    'seasonality': 'Weekly cycle with ±1% effect',
-                    'confidence_interval': '95%',
-                    'prediction_days': 90
-                }
-            }
-
-            with open(PREDICTIONS_FILE, 'w', encoding='utf-8') as f:
-                json.dump(results, f, indent=4, ensure_ascii=False)
-
-            print(f"* Tahminler kaydedildi: {len(all_predictions)} tahmin")
-            logging.info(f"Tahminler kaydedildi: {len(all_predictions)} tahmin")
-            return True
-
-        except Exception as e:
-            error_msg = f"Tahmin sırasında hata: {str(e)}"
-            print(error_msg)
-            logging.error(error_msg)
-            traceback.print_exc()
-            return False
-
-    async def update_daily_price(self):
-        """Her gün 03:00'te çalışır ve yeni fiyatı kaydeder"""
-        try:
-            print("\n=== Günlük Fiyat Güncellemesi ===")
-            date, price = await self.get_bitcoin_price()
-            if date and price:
-                if await self.save_price_to_csv(date, price):
-                    print(f"* Yeni fiyat kaydedildi: {date}, ${price:,.2f}")
-                    return True
-            return False
-        except Exception as e:
-            logging.error(f"Günlük güncelleme sırasında hata: {str(e)}")
-            return False
-
-    async def update_predictions(self):
-        """Her gün 03:01'de çalışır ve tahminleri günceller"""
-        try:
-            print("\n=== Tahmin Güncellemesi ===")
-            if await self.train_sarima_model():
-                print("* Tahminler güncellendi")
-                return True
-            return False
-        except Exception as e:
-            logging.error(f"Tahmin güncellemesi sırasında hata: {str(e)}")
-            return False
-
-    async def schedule_loop(self):
-        """Schedule loop for updating price and predictions"""
-        try:
-            # İlk çalıştırmada hemen güncelle
-            await self.update_daily_price()
-            await self.update_predictions()
-
-            # Günlük zamanlanmış görevleri ayarla
-            schedule.every().day.at("03:00").do(self.update_daily_price)
-            schedule.every().day.at("03:01").do(self.update_predictions)
-
-            while True:
-                try:
-                    schedule.run_pending()
-                    await asyncio.sleep(60)  # Her dakika kontrol et
-                except Exception as e:
-                    logging.error(f"Schedule loop error: {str(e)}")
-                    logging.error(traceback.format_exc())
-                    await asyncio.sleep(300)  # Hata durumunda 5 dakika bekle
-        except Exception as e:
-            logging.error(f"Main schedule loop error: {str(e)}")
-            logging.error(traceback.format_exc())
-            # Hata durumunda yeniden başlatmayı dene
-            await asyncio.sleep(300)
-            await self.schedule_loop()
 
     def read_price_data(self):
         try:
@@ -538,7 +450,7 @@ if __name__ == "__main__":
     
     # Initialize scheduler
     ai = AiAnalysis()
-    asyncio.run(ai.schedule_loop())
+    asyncio.run(ai.train_model())
     
     # Run FastAPI app
     import uvicorn
