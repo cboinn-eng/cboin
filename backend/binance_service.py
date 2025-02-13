@@ -1,7 +1,7 @@
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
 import logging
-from typing import Dict, List
+from typing import Dict, List, Optional
 import asyncio
 import os
 from dotenv import load_dotenv
@@ -22,10 +22,17 @@ class BinanceService:
             api_key = ""
             api_secret = ""
         
-        self.client = Client(
-            api_key=api_key,
-            api_secret=api_secret
-        )
+        try:
+            self.client = Client(
+                api_key=api_key,
+                api_secret=api_secret
+            )
+        except BinanceAPIException as e:
+            logger.error(f"Binance Client başlatılamadı: {str(e)}")
+            self.client = None
+        except Exception as e:
+            logger.error(f"Beklenmeyen hata: {str(e)}")
+            self.client = None
         
         # İzlenecek coin çiftleri
         self.pairs = [
@@ -35,6 +42,10 @@ class BinanceService:
 
     async def get_all_tickers(self) -> List[Dict]:
         """Tüm coin çiftlerinin fiyat bilgilerini getir"""
+        if not self.client:
+            logger.warning("Binance Client bağlantısı yok!")
+            return []
+            
         try:
             # 24 saatlik fiyat değişimlerini al
             tickers = self.client.get_ticker()
@@ -61,16 +72,16 @@ class BinanceService:
                     })
             
             return filtered_tickers
-            
-        except BinanceAPIException as e:
-            logger.error(f"Binance API hatası: {str(e)}")
-            return []
         except Exception as e:
-            logger.error(f"Beklenmeyen hata: {str(e)}")
+            logger.error(f"Ticker bilgileri alınırken hata: {str(e)}")
             return []
 
     async def get_coin_detail(self, symbol: str) -> Dict:
         """Belirli bir coin çifti için detaylı bilgi getir"""
+        if not self.client:
+            logger.warning("Binance Client bağlantısı yok!")
+            return {}
+            
         try:
             # Anlık fiyat bilgisi
             ticker = self.client.get_ticker(symbol=symbol)
@@ -111,11 +122,8 @@ class BinanceService:
                 }
             }
             
-        except BinanceAPIException as e:
-            logger.error(f"Binance API hatası: {str(e)}")
-            return {}
         except Exception as e:
-            logger.error(f"Beklenmeyen hata: {str(e)}")
+            logger.error(f"Coin detayı alınırken hata: {str(e)}")
             return {}
 
     async def get_historical_klines(self, symbol: str, interval: str, limit: int = 100) -> List[Dict]:
@@ -126,6 +134,10 @@ class BinanceService:
         :param limit: Number of klines to return
         :return: List of kline data
         """
+        if not self.client:
+            logger.warning("Binance Client bağlantısı yok!")
+            return []
+            
         try:
             klines = self.client.get_klines(
                 symbol=symbol,
@@ -151,9 +163,6 @@ class BinanceService:
             
             return formatted_klines
             
-        except BinanceAPIException as e:
-            logger.error(f"Binance API error while fetching historical data: {str(e)}")
-            raise Exception(f"Failed to fetch historical data: {str(e)}")
         except Exception as e:
-            logger.error(f"Unexpected error while fetching historical data: {str(e)}")
-            raise Exception(f"Failed to fetch historical data: {str(e)}")
+            logger.error(f"Tarihsel kline verileri alınırken hata: {str(e)}")
+            return []
