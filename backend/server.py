@@ -35,13 +35,10 @@ app = FastAPI()
 # CORS ayarları
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",  # Geliştirme ortamı
-        "https://cboin-trading-bot.onrender.com",  # Production ortamı - frontend URL'nizi buraya ekleyin
-    ],
+    allow_origins=["*"],  # Tüm originlere izin ver
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # Tüm HTTP metodlarına izin ver
+    allow_headers=["*"],  # Tüm headerlara izin ver
 )
 
 # WebSocket bağlantılarını tutacak liste
