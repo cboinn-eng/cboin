@@ -18,7 +18,7 @@ from indicators.multi_coin_signals import MultiCoinAnalyzer
 from fastapi import BackgroundTasks
 from twitter_service import TwitterService
 from binance_service import BinanceService
-from auth_service import AuthService  # Auth servisi eklendi
+from auth_service import router as auth_router  # Auth router'ı import ediyoruz
 from textblob import TextBlob
 import signal
 import sys
@@ -56,11 +56,11 @@ twitter_service = TwitterService()
 # Binance servisi instance'ı
 binance_service = BinanceService()
 
-# Auth servisi instance'ı
-auth_service = AuthService()  # Auth servisi eklendi
-
 # İndikatör servisi instance'ı
 multi_coin_analyzer = MultiCoinAnalyzer()
+
+# Auth router'ı ekle
+app.include_router(auth_router, prefix="/auth", tags=["auth"])
 
 # Auth için Pydantic modelleri
 class UserRegister(BaseModel):

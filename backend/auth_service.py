@@ -1,9 +1,9 @@
-from flask import Blueprint, request, jsonify
+from fastapi import APIRouter, Request, HTTPException, Response
 from database import Database
 import hashlib
 import datetime
 
-auth = Blueprint('auth', __name__)
+router = APIRouter()
 
 class AuthService:
     def __init__(self):
@@ -41,58 +41,58 @@ class AuthService:
 
 auth_service = AuthService()
 
-@auth.route('/register', methods=['POST'])
-def register():
-    data = request.get_json()
+@router.post("/register")
+async def register(request: Request):
+    data = await request.json()
     
     if not data or not data.get('email') or not data.get('password') or not data.get('username'):
-        return jsonify({'message': 'Eksik bilgi!'}), 400
+        raise HTTPException(status_code=400, detail='Eksik bilgi!')
         
     success, message = auth_service.register_user(data['username'], data['password'], data['email'])
     if not success:
-        return jsonify({'message': message}), 400
+        raise HTTPException(status_code=400, detail=message)
         
-    return jsonify({'message': 'Kayıt başarılı!'}), 201
+    return {"message": "Kayıt başarılı!"}
 
-@auth.route('/login', methods=['POST'])
-def login():
-    data = request.get_json()
+@router.post("/login")
+async def login(request: Request):
+    data = await request.json()
     
     if not data or not data.get('email') or not data.get('password'):
-        return jsonify({'message': 'Eksik bilgi!'}), 400
+        raise HTTPException(status_code=400, detail='Eksik bilgi!')
         
     user = auth_service.db.get_user_by_email(data['email'])
     if not user:
-        return jsonify({'message': 'Email veya şifre hatalı!'}), 401
+        raise HTTPException(status_code=401, detail='Email veya şifre hatalı!')
         
     success = auth_service.authenticate_user(user['username'], data['password'])
     if not success:
-        return jsonify({'message': 'Email veya şifre hatalı!'}), 401
+        raise HTTPException(status_code=401, detail='Email veya şifre hatalı!')
         
-    return jsonify({
-        'user': {
-            'username': user['username'],
-            'email': user['email']
+    return {
+        "user": {
+            "username": user['username'],
+            "email": user['email']
         }
-    }), 200
+    }
 
-@auth.route('/me', methods=['GET'])
-def get_user():
+@router.get("/me")
+async def get_user(request: Request):
     auth_header = request.headers.get('Authorization')
     if not auth_header:
-        return jsonify({'message': 'Token bulunamadı!'}), 401
+        raise HTTPException(status_code=401, detail='Token bulunamadı!')
         
     username = auth_header.split(' ')[1]
     user = auth_service.db.get_user_by_username(username)
     if not user:
-        return jsonify({'message': 'Geçersiz token!'}), 401
+        raise HTTPException(status_code=401, detail='Geçersiz token!')
         
-    return jsonify({
-        'username': user['username'],
-        'email': user['email']
-    }), 200
+    return {
+        "username": user['username'],
+        "email": user['email']
+    }
 
-@auth.route('/logout', methods=['POST'])
-def logout():
+@router.post("/logout")
+async def logout():
     # Client tarafında token silinecek
-    return jsonify({'message': 'Başarıyla çıkış yapıldı!'}), 200
+    return {"message": "Başarıyla çıkış yapıldı!"}
