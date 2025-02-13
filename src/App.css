@@ -461,8 +461,7 @@ body {
 
 /* Dashboard Styles */
 .site-layout {
-  background: url('./assets/images/gradient-technology-background.jpg') no-repeat center center fixed;
-  background-size: cover;
+  background: transparent;
   min-height: 100vh;
 }
 
@@ -606,4 +605,15 @@ body {
     flex-direction: column;
     gap: 16px;
   }
+}
+
+/* Auth Pages */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background-size: cover;
+  padding: 20px;
 }
