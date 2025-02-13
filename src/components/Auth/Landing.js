@@ -11,7 +11,6 @@ const Landing = () => {
         <div className="landing-container">
             <div className="landing-content">
                 <div className="landing-header">
-                    <img src="/logo.png" alt="CBOIN Logo" className="landing-logo" />
                     <Title level={1}>CBOIN Trading</Title>
                     <Paragraph className="landing-subtitle">
                         Kripto dünyasının geleceğine hoş geldiniz
