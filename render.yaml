@@ -1,18 +1,35 @@
 services:
   - type: web
-    name: cboin-trading-bot
-    env: python
-    buildCommand: pip install -r backend/requirements.txt
-    startCommand: cd backend && uvicorn server:app --host 0.0.0.0 --port $PORT
+    name: cboin-api
+    env: docker
+    region: frankfurt
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.9.0
-      - key: CRYPTOCOMPARE_API_KEY
-        sync: false
+      - key: TWITTER_API_KEY
+        value: 2QbYBxSKRNuOmwHPEGxGnYQPi
+      - key: TWITTER_API_SECRET
+        value: aBXZxkUqMDfOlzNBtZIxF2qjmJmYXrxSEv5FIbYlIRCrWVLEEy
+      - key: TWITTER_ACCESS_TOKEN
+        value: 1747932258453893120-vqknInJajGvrI8EJOUMi5r56WzvzJE
+      - key: TWITTER_ACCESS_TOKEN_SECRET
+        value: nbI6RWbBqi4N8Rqu51QcDLEgYC9BW8RobfsihujKOBzX6
+      - key: TWITTER_BEARER_TOKEN
+        value: AAAAAAAAAAAAAAAAAAAAAEyVzAEAAAAAj5QHhp6MNovqjv679NH9u91uMks%3DfBc5q9lW4v6FOQTBAF1El1t6J7hIfZ7MnxH12jdMBOdUPnUcw6
       - key: BINANCE_API_KEY
-        sync: false
+        value: MSOtGvpGgyN73SUOEyNfmL7fEzWN7tNP7V7HagtHWxUfpSOZavAFksZwBCwZBl7L
       - key: BINANCE_API_SECRET
-        sync: false
+        value: 45gKGln6PKsp9702zdDrpmPxgLSzQXj1GkwdBrnJ88TTyxWrujugFAffIw97Kpg
+      - key: CRYPTOCOMPARE_API_KEY
+        value: your_key
+      - key: REACT_APP_CRYPTOCOMPARE_API_KEY
+        value: your_key
+      - key: EMTIA_API_KEY
+        value: EeCzp3KmtjxN9I0ZBbLrwIsDQljf24cz
+      - key: DATABASE_URL
+        value: sqlite:///cboin.db
+      - key: DATABASE_PATH
+        value: cboin.db
 
   - type: worker
     name: cboin-ping-worker
