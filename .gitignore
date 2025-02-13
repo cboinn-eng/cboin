@@ -51,3 +51,9 @@ logs/
 # System Files
 .DS_Store
 Thumbs.db
+
+# Large media files
+src/assets/images/*.mp4
+src/assets/images/*.jpg
+src/assets/images/*.png
+src/assets/backgrounds/*
