@@ -23,7 +23,7 @@ const AiAnalysis = () => {
   const fetchPredictions = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(ENDPOINTS.MARKET.PREDICTIONS);
+      const response = await axios.get(ENDPOINTS.AI.PREDICTIONS);
       const data = response.data;
       setPredictions(data.predictions || []);
       setLastUpdate(data.last_update || new Date().toLocaleString());
@@ -39,7 +39,7 @@ const AiAnalysis = () => {
   const updatePredictions = async () => {
     try {
       setUpdating(true);
-      await axios.get(ENDPOINTS.MARKET.PREDICTIONS_UPDATE);
+      await axios.get(ENDPOINTS.AI.PREDICTIONS_UPDATE);
       await fetchPredictions();
     } catch (error) {
       console.error('Tahminler güncellenirken hata:', error);
@@ -68,7 +68,7 @@ const AiAnalysis = () => {
       }, 1000);
 
       // SARIMA modelini başlat
-      const response = await axios.post('http://localhost:8001/model/sarima', {
+      const response = await axios.post(ENDPOINTS.AI.START_MODEL, {
         coin: 'BTC'  // Coin parametresini body'de gönder
       }, {
         headers: {
@@ -102,258 +102,155 @@ const AiAnalysis = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (analysisInterval) {
-        clearInterval(analysisInterval);
-      }
+  const renderLineChart = () => {
+    if (!predictions.length) return null;
+
+    const chartData = predictions.map(item => ({
+      date: new Date(item.timestamp).toLocaleDateString(),
+      price: item.actual_price,
+      prediction: item.predicted_price
+    }));
+
+    const config = {
+      data: chartData,
+      xField: 'date',
+      yField: ['price', 'prediction'],
+      seriesField: 'type',
+      color: ['#1890ff', '#f5222d'],
+      point: {
+        size: 5,
+        shape: 'diamond',
+      },
+      tooltip: {
+        showMarkers: false,
+      },
+      state: {
+        active: {
+          style: {
+            shadowBlur: 4,
+            stroke: '#000',
+            fill: 'red',
+          },
+        },
+      },
+      interactions: [
+        {
+          type: 'marker-active',
+        },
+      ],
     };
-  }, []);
 
-  const filteredPredictions = predictions.slice(0, selectedPeriod);
-
-  const chartConfig = {
-    data: filteredPredictions,
-    xField: 'date',
-    yField: 'prediction',
-    seriesField: 'type',
-    smooth: true,
-    animation: {
-      appear: {
-        animation: 'path-in',
-        duration: 1000,
-      },
-    },
-    xAxis: {
-      type: 'time',
-      label: {
-        formatter: (v) => new Date(v).toLocaleDateString(),
-      },
-    },
-    yAxis: {
-      label: {
-        formatter: (v) => `$${Number(v).toLocaleString()}`,
-      },
-    },
-    tooltip: {
-      showMarkers: true,
-      formatter: (datum) => {
-        return {
-          name: datum.type,
-          value: `$${Number(datum.value).toLocaleString()}`,
-        };
-      },
-    },
+    return <Line {...config} />;
   };
-
-  // Grafik için veriyi hazırla
-  const chartData = filteredPredictions.flatMap((p) => [
-    { date: p.date, value: p.prediction, type: 'Tahmin' },
-    { date: p.date, value: p.lower_bound, type: 'Alt Sınır' },
-    { date: p.date, value: p.upper_bound, type: 'Üst Sınır' },
-  ]);
 
   const columns = [
     {
       title: 'Tarih',
-      dataIndex: 'date',
-      key: 'date',
+      dataIndex: 'timestamp',
+      key: 'timestamp',
+      render: text => new Date(text).toLocaleString()
     },
     {
-      title: 'Mevcut Fiyat',
-      dataIndex: 'current_price',
-      key: 'current_price',
-      render: (value) => `$${value.toLocaleString()}`,
+      title: 'Gerçek Fiyat',
+      dataIndex: 'actual_price',
+      key: 'actual_price',
+      render: price => `$${price.toFixed(2)}`
     },
     {
       title: 'Tahmin',
-      dataIndex: 'prediction',
-      key: 'prediction',
-      render: (value) => `$${value.toLocaleString()}`,
+      dataIndex: 'predicted_price',
+      key: 'predicted_price',
+      render: price => `$${price.toFixed(2)}`
     },
     {
-      title: 'Değişim',
-      key: 'change',
-      render: (_, record) => {
-        const change = ((record.prediction - record.current_price) / record.current_price) * 100;
-        const color = change >= 0 ? '#3f8600' : '#cf1322';
-        const icon = change >= 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />;
-        return (
-          <Tag color={color}>
-            {icon} {Math.abs(change).toFixed(2)}%
-          </Tag>
-        );
-      },
-    },
-  ];
-
-  const renderAnalysisStatus = () => {
-    switch (analysisStatus) {
-      case 'running':
-        return (
-          <Alert
-            message="Analiz Devam Ediyor"
-            description={
-              <Space direction="vertical">
-                <Typography.Text>SARIMA modeli eğitiliyor ve tahminler hesaplanıyor...</Typography.Text>
-                <Progress 
-                  percent={Math.round(analysisProgress)} 
-                  status="active"
-                  strokeColor={{
-                    '0%': '#108ee9',
-                    '100%': '#87d068',
-                  }}
-                />
-                <Typography.Text>Tahmini kalan süre: {Math.ceil(totalTime - (analysisProgress / 100 * totalTime))} saniye</Typography.Text>
-              </Space>
-            }
-            type="info"
-            showIcon
-            icon={<LoadingOutlined />}
-          />
-        );
-      case 'completed':
-        return (
-          <Alert
-            message="Analiz Tamamlandı"
-            description="SARIMA model tahminleri başarıyla güncellendi."
-            type="success"
-            showIcon
-          />
-        );
-      case 'error':
-        return (
-          <Alert
-            message="Hata"
-            description={analysisError}
-            type="error"
-            showIcon
-          />
-        );
-      default:
-        return null;
+      title: 'Doğruluk',
+      dataIndex: 'accuracy',
+      key: 'accuracy',
+      render: accuracy => (
+        <Tag color={accuracy > 80 ? 'green' : accuracy > 60 ? 'orange' : 'red'}>
+          {accuracy.toFixed(2)}%
+        </Tag>
+      )
     }
-  };
-
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <Spin size="large" />
-        <p>Tahminler yükleniyor...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <Alert
-        message="Hata"
-        description={error}
-        type="error"
-        showIcon
-        action={
-          <Button onClick={fetchPredictions} type="primary">
-            Tekrar Dene
-          </Button>
-        }
-      />
-    );
-  }
+  ];
 
   return (
     <div className="ai-analysis-container">
-      <Row gutter={[16, 16]} className="header-row">
-        <Col span={16}>
-          <h2>Bitcoin Fiyat Tahminleri</h2>
-          <p className="last-update">Son güncelleme: {lastUpdate}</p>
-        </Col>
-        <Col span={8} style={{ textAlign: 'right' }}>
-          <Button
-            type="primary"
-            icon={<SyncOutlined spin={updating} />}
-            onClick={updatePredictions}
-            loading={updating}
-          >
-            Tahminleri Güncelle
-          </Button>
-        </Col>
-      </Row>
-
       <Row gutter={[16, 16]}>
-        <Col span={8}>
-          <Card>
-            <Statistic
-              title="Mevcut Fiyat"
-              value={predictions[0]?.current_price}
-              precision={2}
-              prefix="$"
-            />
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card>
-            <Statistic
-              title="7 Günlük Tahmin"
-              value={predictions[6]?.prediction}
-              precision={2}
-              prefix="$"
-              valueStyle={{
-                color: predictions[6]?.prediction > predictions[0]?.current_price ? '#3f8600' : '#cf1322',
-              }}
-              suffix={
-                <Tag color={predictions[6]?.prediction > predictions[0]?.current_price ? 'success' : 'error'}>
-                  {(((predictions[6]?.prediction - predictions[0]?.current_price) / predictions[0]?.current_price) * 100).toFixed(2)}%
-                </Tag>
-              }
-            />
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card>
-            <Statistic
-              title="30 Günlük Tahmin"
-              value={predictions[29]?.prediction}
-              precision={2}
-              prefix="$"
-              valueStyle={{
-                color: predictions[29]?.prediction > predictions[0]?.current_price ? '#3f8600' : '#cf1322',
-              }}
-              suffix={
-                <Tag color={predictions[29]?.prediction > predictions[0]?.current_price ? 'success' : 'error'}>
-                  {(((predictions[29]?.prediction - predictions[0]?.current_price) / predictions[0]?.current_price) * 100).toFixed(2)}%
-                </Tag>
-              }
-            />
+        <Col span={24}>
+          <Card title="SARIMA Model Analizi" extra={
+            <Space>
+              <Button
+                type="primary"
+                icon={<SyncOutlined />}
+                loading={updating}
+                onClick={updatePredictions}
+              >
+                Tahminleri Güncelle
+              </Button>
+              <Button
+                type="default"
+                icon={analysisLoading ? <LoadingOutlined /> : <SyncOutlined />}
+                loading={analysisLoading}
+                onClick={startAnalysis}
+                disabled={analysisStatus === 'running'}
+              >
+                Yeni Analiz Başlat
+              </Button>
+            </Space>
+          }>
+            {error && (
+              <Alert
+                message="Hata"
+                description={error}
+                type="error"
+                showIcon
+                style={{ marginBottom: 16 }}
+              />
+            )}
+
+            {analysisStatus === 'running' && (
+              <div style={{ marginBottom: 16 }}>
+                <Progress
+                  percent={Math.round(analysisProgress)}
+                  status={analysisStatus === 'error' ? 'exception' : 'active'}
+                />
+                <Typography.Text type="secondary">
+                  Analiz devam ediyor... ({Math.round(analysisProgress)}%)
+                </Typography.Text>
+              </div>
+            )}
+
+            {analysisError && (
+              <Alert
+                message="Analiz Hatası"
+                description={analysisError}
+                type="error"
+                showIcon
+                style={{ marginBottom: 16 }}
+              />
+            )}
+
+            {loading ? (
+              <div style={{ textAlign: 'center', padding: '20px' }}>
+                <Spin size="large" />
+              </div>
+            ) : (
+              <>
+                <div style={{ marginBottom: 16 }}>
+                  {renderLineChart()}
+                </div>
+                <Table
+                  dataSource={predictions}
+                  columns={columns}
+                  rowKey="timestamp"
+                  pagination={{ pageSize: 10 }}
+                />
+              </>
+            )}
           </Card>
         </Col>
       </Row>
-
-      <Card style={{ marginTop: 16 }}>
-        <Line {...chartConfig} data={chartData} />
-      </Card>
-
-      <Card style={{ marginTop: 16 }}>
-        <Table
-          dataSource={filteredPredictions}
-          columns={columns}
-          rowKey="date"
-          pagination={{ pageSize: 7 }}
-        />
-      </Card>
-
-      <Card style={{ marginTop: 16 }}>
-        <Button
-          type="primary"
-          size="large"
-          onClick={startAnalysis}
-          loading={analysisLoading}
-          disabled={analysisStatus === 'running'}
-          block
-        >
-          {analysisStatus === 'running' ? 'Analiz Devam Ediyor...' : 'Analizi Başlat'}
-        </Button>
-        {renderAnalysisStatus()}
-      </Card>
     </div>
   );
 };
