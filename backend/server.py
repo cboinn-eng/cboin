@@ -1,14 +1,15 @@
-from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Depends
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
+from pydantic import BaseModel
+from typing import Optional, List
 import logging
+import asyncio
+import os
+import uvicorn
 import json
 from datetime import datetime, timedelta
 import random
-from typing import Dict, List
-import asyncio
-import string
-import os
+from typing import Dict
 import aiohttp
 import json
 from Dashboard.Nasdaq2Marrket import NasdaqMarketAnalyzer
@@ -18,8 +19,6 @@ from fastapi import BackgroundTasks
 from twitter_service import TwitterService
 from binance_service import BinanceService
 from auth_service import AuthService  # Auth servisi eklendi
-from pydantic import BaseModel
-import tweepy
 from textblob import TextBlob
 import signal
 import sys

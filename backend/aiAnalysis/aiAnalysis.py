@@ -10,14 +10,13 @@ import time
 from binance.client import Client
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 import traceback
-from flask import Flask, jsonify
-from flask_cors import CORS
-from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import asyncio
 from pmdarima import auto_arima  # Hiperparametre optimizasyonu için
 import matplotlib.pyplot as plt  # Grafik oluşturmak için
 import io
 import base64  # Grafiği base64 formatına dönüştürmek için
-import asyncio
 
 warnings.filterwarnings('ignore')
 
@@ -138,7 +137,7 @@ class AiAnalysis:
                               error_action='ignore', # Hataları görmezden gel
                               suppress_warnings=True, # Uyarıları bastır
                               stepwise=True)         # Adım adım optimizasyon yap
-            
+        
             print("* Model eğitimi tamamlandı")
             print(f"* En iyi model parametreleri: {model.order}, {model.seasonal_order}")
             
@@ -467,32 +466,44 @@ class AiAnalysis:
             logging.error(f"Tahminler kaydedilirken hata: {str(e)}")
             return False
 
-app = Flask(__name__)
-CORS(app)
+app = FastAPI()
 
-@app.route('/ai/predictions', methods=['GET'])
-def get_predictions():
+class AnalysisRequest(BaseModel):
+    text: str
+
+@app.post("/analyze")
+async def analyze(request: AnalysisRequest):
+    try:
+        # Your analysis logic here
+        result = {"analysis": "Sample analysis result"}
+        return result
+    except Exception as e:
+        logging.error(f"Error in analysis: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/ai/predictions")
+async def get_predictions():
     """API endpoint for getting predictions"""
     try:
         ai = AiAnalysis()
         predictions = ai.get_latest_analysis()
-        return jsonify(predictions)
+        return predictions
     except Exception as e:
         logging.error(f"Predictions endpoint error: {str(e)}")
-        return jsonify({"error": str(e)}), 500
+        raise HTTPException(status_code=500, detail=str(e))
 
-@app.route('/ai/predictions/plot', methods=['GET'])
-def get_predictions_plot():
+@app.get("/ai/predictions/plot")
+async def get_predictions_plot():
     """Tahminleri grafik olarak döner"""
     try:
         ai = AiAnalysis()
         predictions = ai.get_latest_analysis()
         
         # Tahmin verilerini al
-        dates = [pred['date'] for pred in predictions['predictions']]
-        pred_values = [pred['prediction'] for pred in predictions['predictions']]
-        lower_bounds = [pred['lower_bound'] for pred in predictions['predictions']]
-        upper_bounds = [pred['upper_bound'] for pred in predictions['predictions']]
+        dates = [pred['date'] for pred in predictions]
+        pred_values = [pred['prediction'] for pred in predictions]
+        lower_bounds = [pred['lower_bound'] for pred in predictions]
+        upper_bounds = [pred['upper_bound'] for pred in predictions]
         
         # Grafik oluştur
         plt.figure(figsize=(12, 6))
@@ -513,10 +524,10 @@ def get_predictions_plot():
         plt.close()
         
         # Base64 formatında grafiği döndür
-        return jsonify({"plot": base64.b64encode(img.getvalue()).decode('utf-8')})
+        return {"plot": base64.b64encode(img.getvalue()).decode('utf-8')}
     except Exception as e:
         logging.error(f"Grafik oluşturma sırasında hata: {str(e)}")
-        return jsonify({"error": str(e)}), 500
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     print("Starting SARIMA model server...")
@@ -528,5 +539,6 @@ if __name__ == "__main__":
     ai = AiAnalysis()
     asyncio.run(ai.schedule_loop())
     
-    # Run Flask app
-    app.run(host='0.0.0.0', port=5000)
+    # Run FastAPI app
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=5000)
