@@ -8,8 +8,8 @@
     "@antv/util": "^3.3.5",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.15.6",
     "@mui/icons-material": "^5.15.6",
+    "@mui/material": "^5.15.6",
     "@react-oauth/google": "^0.12.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -24,7 +24,8 @@
     "react-scripts": "5.0.1",
     "recharts": "^2.10.4",
     "twitter-api-v2": "^1.19.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3": "^4.16.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"

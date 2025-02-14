@@ -5,6 +5,7 @@ from typing import Dict, List, Optional
 import asyncio
 import os
 from dotenv import load_dotenv
+import requests
 
 # .env dosyasını yükle
 load_dotenv()
@@ -13,32 +14,38 @@ logger = logging.getLogger(__name__)
 
 class BinanceService:
     def __init__(self):
-        # API anahtarlarını çevre değişkenlerinden al
-        api_key = os.getenv('BINANCE_API_KEY')
-        api_secret = os.getenv('BINANCE_API_SECRET')
-        
-        if not api_key or not api_secret:
-            logger.warning("Binance API anahtarları bulunamadı!")
-            api_key = ""
-            api_secret = ""
-        
-        try:
-            self.client = Client(
-                api_key=api_key,
-                api_secret=api_secret
-            )
-        except BinanceAPIException as e:
-            logger.error(f"Binance Client başlatılamadı: {str(e)}")
-            self.client = None
-        except Exception as e:
-            logger.error(f"Beklenmeyen hata: {str(e)}")
-            self.client = None
+        self.client = None
+        self.proxy = {
+            'http': os.getenv('HTTP_PROXY'),
+            'https': os.getenv('HTTPS_PROXY')
+        }
+        self.init_client()
         
         # İzlenecek coin çiftleri
         self.pairs = [
             "BTCUSDT", "ETHUSDT", "BNBUSDT", "ADAUSDT", "DOGEUSDT",
             "XRPUSDT", "DOTUSDT", "SOLUSDT", "MATICUSDT", "LINKUSDT"
         ]
+
+    def init_client(self):
+        try:
+            api_key = os.getenv('BINANCE_API_KEY')
+            api_secret = os.getenv('BINANCE_API_SECRET')
+            
+            # Proxy ayarlarını kullan
+            session = requests.Session()
+            session.proxies.update(self.proxy)
+            
+            self.client = Client(
+                api_key, 
+                api_secret,
+                requests_params={'proxies': self.proxy}
+            )
+            logger.info("Binance client başarıyla başlatıldı")
+        except BinanceAPIException as e:
+            logger.error(f"Binance Client başlatılamadı: {str(e)}")
+        except Exception as e:
+            logger.error(f"Beklenmeyen hata: {str(e)}")
 
     async def get_all_tickers(self) -> List[Dict]:
         """Tüm coin çiftlerinin fiyat bilgilerini getir"""

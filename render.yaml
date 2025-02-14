@@ -30,6 +30,10 @@ services:
         value: sqlite:///cboin.db
       - key: DATABASE_PATH
         value: cboin.db
+      - key: HTTP_PROXY
+        value: http://proxy.example.com:8080
+      - key: HTTPS_PROXY
+        value: http://proxy.example.com:8080
 
   - type: worker
     name: cboin-ping-worker
@@ -39,6 +43,10 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
+      - key: HTTP_PROXY
+        value: http://proxy.example.com:8080
+      - key: HTTPS_PROXY
+        value: http://proxy.example.com:8080
 
   - type: web
     name: cboin-frontend
@@ -48,3 +56,7 @@ services:
     envVars:
       - key: REACT_APP_API_URL
         value: https://cboin-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
